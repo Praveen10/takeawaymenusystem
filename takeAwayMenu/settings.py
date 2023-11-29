@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'takeAwayMenuSystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',
+        'NAME': 'xxx',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'root',
-        'PASSWORD': 'praveen@123',
+        'PASSWORD': 'xxx@xxx',
     }
 }
 
@@ -142,13 +142,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'praveenrajamani@outlook.com'
-EMAIL_HOST_PASSWORD = 'gvcghmaeyooeimib'
+EMAIL_HOST_USER = 'xxx@xxx.com'
+EMAIL_HOST_PASSWORD = 'xxxx'
 
 # Image storage
           
 # cloudinary.config( 
-#   cloud_name = "dezsuolj8", 
-#   api_key = "897955427895714", 
-#   api_secret = "S_2xfjyvvhncP63chunUASKZlLI" 
+#   cloud_name = "xxx", 
+#   api_key = "xxx", 
+#   api_secret = "xxx" 
 # )
