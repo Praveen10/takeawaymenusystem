@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+nav {
+    background: #c5c5c5;
+
+}
+
+nav .logo {
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+nav:after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+/* .addressCard {
+    margin-top: 50px;
+    border: 1px solid #070707;
+    font-weight: bold;
+}
+
+label {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.addressCard ::placeholder {
+    opacity: 0.3; 
+}
+
+
+
+.order-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 90px;
+    border-radius: 20px;
+}
+
+.order-container h1 {
+    margin-bottom: 20px;
+}
+
+.selected-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+}
+
+.selected-item .item{
+    font-weight: bold;
+    width: 70px;
+}
+
+.selected-item .button {
+    border: none;
+    background-color: #037c21;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.selected-item .quantity {
+    width: 20px;
+    text-align: center;
+    border: none;
+    margin: 0 2px;
+    border: 1px solid #ccc;
+}
+
+.totals {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.totals div {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.total {
+    font-weight: bold;
+}
+
+.totals span.amount span.subAmount {
+    text-align: right;
+}
+
+.checkout-btn {
+    border: none;
+    background-color: #037c21;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.address-btn {
+    border: none;
+    background-color: #037c21;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    float: right;
+} */
+
+body {
+    background: #eecda3;
+    background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+    background: linear-gradient(to right, #eecda3, #ef629f);
+    min-height: 100vh;
+  }
+
+.placeOrder {
+    background-color: #037c21;
+    color: #fff;
+    float: right;
+}
+
+.coupon {
+    background-color: #037c21;
+    color: #fff;
+}
+
+.coupon:hover {
+    color: #037c21;
+    box-shadow: 0 0 5px #037c21,
+                0 0 5px #037c21;
+}
+
+.placeOrder:hover {
+    color: #037c21;
+    box-shadow: 0 0 5px #037c21,
+                0 0 5px #037c21;
+}
+
+.input-group ::placeholder {
+    opacity: 0.3;
+}
+
+.headerCard {
+    background-color: #037c21;
+    color: #fff;;
+}
+
+.button {
+    border: none;
+    background-color: #037c21;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+
+.border-red {
+    border-color: red;
+}
+
+/* .clickable-card {
+    cursor: pointer;
+} */
+
+.addAddressList {
+    width: 350px; 
+    margin-top: 20px; 
+    height: 40px; 
+    background-color: #037c21; 
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.form-label {
+    font-weight: bold;
+    
+}
+
+.icon {
+    font-size: 24px; 
+  }
+
+.addressLabel, .instructionLabel {
+    font-size: large;
+}
+
+
+
+.clickable-card {
+    cursor: pointer;
+    display: flex; 
+}
+
+.icon {
+    font-size: 24px;
+    margin-right: 5px; 
+  }
+
+.change-text, .instructionChange {
+    float: right;
+    color: #007bff; 
+    font-size: 1.2rem;
+    /* cursor: pointer; */
+}
+
+.loyalityCard,.tipCard, .summaryBox, .modeOrder {
+    border: 1px solid #c5c5c5;
+    margin-bottom: 10px;
+}
+
+.tipCard{
+    margin-top: 5px;
+}
+
+.tip-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tipPara, .promoPara {
+    font-size: large;
+}
+
+.text-area-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.instructionText {
+    color: #ef629f;
+}
+
+.textbutton {
+    width: calc(20% - 10px); 
+    background-color: #037c21;
+    color: #ffffff;
+    margin-top: 3px;
+    /* margin: #037c21; */
+}
+
+.saveTextArea {
+    margin-left: 380px;
+    margin-right: 5px;
+}
+
+.dullSaveButton {
+    background-color: #ccc; 
+    color: #666; 
+}
+
+/* .cancelTextArea {
+    margin-left: 30px;
+} */
+
+.tip-button {
+    width: calc(20% - 10px); 
+    background-color: #ffffff;
+    color: #037c21;
+    margin: #037c21;
+    border-radius: 50px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    /* transition: 0.3 #037c21; */
+}
+
+.tip-button.active {
+    background-color: #037c21; 
+    color: #ffffff;
+}
+
+.orderTotalList {
+    margin-top: 30px;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Style label text */
+label {
+    display: inline-block;
+    margin-right: 20px;
+}
+

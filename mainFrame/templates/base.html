@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YummiLicious</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+</head>
+<body>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JavaScript -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+    <!-- Logo on the left -->
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'images/CoolBrand.png' %}" width="90%" height="60" class="d-inline-block align-top" alt="Logo">
+    </a>
+    
+    <!-- Toggle button for "Deliver" and "Pickup" -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Search bar and cart on the right -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <input type="text" class="form-control mr-2" placeholder="Search">
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-shopping-cart"></i> Cart
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container mt-4">
+    <div class="row">
+      <!-- First Column - Small size (2 columns out of 12) on small and larger screens -->
+      <div class="col-md-2 col-sm-4 bg-secondary">
+        <!-- Content for the first column goes here -->
+        <h2>First Column</h2>
+        <p>This is the content of the first column.</p>
+      </div>
+      
+      <!-- Second Column - Large size (10 columns out of 12) on small and larger screens -->
+      <div class="col-md-10 col-sm-8">
+        <!-- Content for the second column goes here -->
+        <h2>Second Column</h2>
+        <p>This is the content of the second column.</p>
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- Card (without anchor tag) -->
+              <div class="card clickable-card">
+                <!-- Card Image -->
+                <img src="{% static 'images/HomePage.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <!-- Card Title (Name) -->
+                  <h5 class="card-title">Restaurant Name</h5>
+                  <!-- Card Text (Short Paragraph) -->
+                  <p class="card-text">British, Desert</p>
+                  <p class="card-text"><i class="fa-regular fa-star"></i> 4.7 (12)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Card (without anchor tag) -->
+        <div class="card clickable-card">
+          <!-- Card Image -->
+          <img src="{% static 'images/HomePage.jpg' %}" class="card-img-top" alt="Restaurant Image">
+          <div class="card-body">
+            <!-- Card Title (Restaurant Name) -->
+            <h5 class="card-title">Restaurant XYZ</h5>
+            <!-- Card Text (Short Description) -->
+            <p class="card-text">Experience the best flavors of our delicious menu. Our skilled chefs
+              prepare mouthwatering dishes to satisfy your taste buds.</p>
+          </div>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- $('#input-tags').selectize({
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+        return {
+            value: input,
+            text: input
+        }
+    }
+}); -->
+    <div class="tag-container">
+      <div class="tag-input">
+          <input type="text" id="tagInput" placeholder="Enter tags">
+      </div>
+  </div>
+  <button id="submitBtn">Submit</button>
+  <style>
+    .tag-container {
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.tag {
+    background-color: #f1f1f1;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.tag-text {
+    margin-right: 5px;
+}
+
+.tag-remove {
+    cursor: pointer;
+}
+    /* Add custom CSS to change the cursor to pointer on the card */
+    .clickable-card {
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    // Add click event listener to the card
+    document.querySelector('.clickable-card').addEventListener('click', function() {
+      window.location.href = 'https://example.com';
+    });
+
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,70 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>YummiLicious</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <!-- <script type="text/javascript" defer src="{% static 'js/login.js' %}"></script> -->
+</head>
+    <body id="bg" background="{% static 'images/turkey.jpg' %}">
+        <nav>
+            <div class="logo">
+                <img src="{% static 'images/CoolBrand.png' %}" height="60"  alt="CoolBrand">
+            </div>
+            <ul>
+                <li>
+                    <a href="#"><i class="fa-solid fa-angle-down"></i>  Partner with us</a>
+                    <ul>
+                        <li><a href="{% url 'restaurantRegistration' %}">Restaurant</a></li>
+                        <li><a href="{% url 'delivererRegistration' %}">Riders</a></li>
+                        <li><a href="{% url 'adminLogin' %}">Administrator</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+            </ul>
+        </nav>
+        <section>
+            <div class="cont">
+                <div class="first">
+                    <div class="topDiv">
+                        <p class="paragraph">Good Food , Eat your heart out!</p>
+                        <form class="form">
+                            <!-- <i class="fa-light fa-magnifying-glass"></i> -->
+                            <input type="text" placeholder="Find restaurant near you">
+                            <button type="button" ><a href="{% url 'login' %}" style="text-decoration: none; color: white;">Search</a></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="tocheck">
+            <div class="tosee">
+                <div class="about">
+                    <h5 class="footerHeader">About YummiLicious</h5><br>
+                    <p class="footerPara"> &emsp; &emsp; YummiLicious - Savor the Flavor of Convenience! Your ultimate online takeaway system, serving up delectable dishes at your fingertips. Order, indulge, and relish a delightful dining experience from the comfort of your home.</p>
+                </div>
+                <div class="faq">
+                    <h5 class="footerHeader">Faq's</h5><br>
+                    <div class="rectangle">
+                        <p class="footerPara"p><b>1. How can I provide feedback or share order experience with YummiLicious? </b><br><br>
+                            <b>Answer: </b>We greatly value your feedback as it helps us improve and provide the best dining experience possible. You can share your thoughts and suggestions by leaving a review on our website, social media platforms, or through the feedback on your order page. Your feedback is invaluable to us, and we are always eager to hear from our customers.</p>
+                    </div>
+                </div>
+                <div class="social">
+                    <p class="text"><b>Connect with us</b></p>
+                    <div class="socialMediaLogo">
+                        <a href="https://www.instagram.com/yummilicious0/" style="text-decoration: none;"><i class="fa-brands fa-instagram fa-xl"></i></a> &emsp;
+                        <i class="fa-brands fa-facebook fa-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

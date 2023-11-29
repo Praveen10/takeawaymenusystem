@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* body {
+  font-family: "Times New Roman", Times, serif;
+} */
+.navbar {
+  background-color: #f8f8f8;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.divBar {
+  min-height: 93.3vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* background: #9f654f; */
+  background-image: linear-gradient(to right, #50cc7f 0%, #f5d100 100%);
+}
+
+
+.form {
+  position: relative;
+  width: 38%;
+  /* background: #c39f91; */
+  background-image: linear-gradient(to right top, #f5d100 0%, #50cc7f 100%);
+  padding: 25px;
+  margin-left: 400px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+}
+.container .form {
+  margin-top: 50px;
+}
+
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #333;
+  font-weight: 600;
+}
+.input-box .error input {
+  border-color: #ff3860;
+}
+
+.input-control .error {
+  color: #ff3860;
+  font-size: 9px;
+  height: 13px;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.text-center {
+  text-align: center;
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+
+.form button {
+  height: 55px;
+  width: 40%;
+  color: #fff;
+  border-radius: 60px;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* background: rgb(130, 106, 251); */
+  background: #064e10;
+}
+.form button:hover {
+  background: #037c21;
+}
+.login{
+  color: white;
+  margin: 20px 0;
+  font-family: 'Poppins',sans-serif;
+}
+.sign-up{
+  margin: 20px 0;
+  text-align: center;
+}
+
+::placeholder {
+  opacity: 0.3; 
+}
+
+.input-box input:focus {
+  outline: 0;
+}
+
+.input-box.success input {
+  border-color: #09c372;
+}
+
+.input-box.error input {
+  border-color: #ff3860;
+}
+
+.input-box .error {
+  color: #eb274e;
+  font-size: 12px;
+  margin: 5px 0;
+}
+	
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.nav-item {
+  margin-right: 15px;
+  font-size: 1.3rem;
+  font-weight: 500;
+}

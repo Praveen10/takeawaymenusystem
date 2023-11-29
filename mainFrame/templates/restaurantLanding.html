@@ -1,0 +1,615 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>YummiLicious</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Font Awesome -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS  -->
+    <link rel="stylesheet" href="{% static 'css/restaurantLanding.css' %}">
+    <!-- Logo -->
+    <link rel="icon" href="{% static 'images/mainLogo.png' %}">
+    <!-- CSS Boostrap and datatable -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-1.13.5/b-2.4.1/b-html5-2.4.1/b-print-2.4.1/datatables.min.css" rel="stylesheet">
+    <!-- JS bootstrap and datatable -->
+    <script defer src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <!-- <script defer src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script> -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script defer src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-1.13.5/b-2.4.1/b-html5-2.4.1/b-print-2.4.1/datatables.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Dropdowm JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script defer src="{% static 'js/restaurantLanding.js' %}"></script>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{% static 'images/CoolBrand.png' %}" height="60"  alt="CoolBrand">
+        </div>
+        <ul>
+            <li>
+                <a href="{% url 'home' %}"><i class="fa-solid fa-right-from-bracket"></i>&ensp;Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="roww">
+        <div class="column1" style="background-image: linear-gradient(to right top, #f5d100 0%, #50cc7f 100%);">
+            {% if validation == 'orders' %}
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{% url 'restaurantLanding' id=pick %}"> 
+                            <i class="fa-solid fa-house"></i>Menu Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" href="{% url 'restaurantOrderList' id=pick %}">
+                            <i class="fa-solid fa-bell-concierge"></i>Orders
+                        </a>
+                    </li>    
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 " href="{% url 'restaurantDiscount' id=pick %}">
+                            <i class="fa-solid fa-tags"></i>Discounts 
+                        </a>
+                    </li>
+                </ul> 
+            {% elif validation == 'discount' %}   
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{% url 'restaurantLanding' id=pick %}">
+                        <i class="fa-solid fa-house"></i>Menu Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'restaurantOrderList' id=pick %}">
+                        <i class="fa-solid fa-bell-concierge"></i>Orders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 active" href="{% url 'restaurantDiscount' id=pick %}">
+                        <i class="fa-solid fa-tags"></i>Discounts 
+                    </a>
+                </li>
+            </ul> 
+            {% else %}
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{% url 'restaurantLanding' id=pick %}">
+                        <i class="fa-solid fa-house"></i>Menu Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'restaurantOrderList' id=pick %}">
+                        <i class="fa-solid fa-bell-concierge"></i>Orders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 " href="{% url 'restaurantDiscount' id=pick %}">
+                        <i class="fa-solid fa-tags"></i>Discounts 
+                    </a>
+                </li>
+            </ul> 
+            {% endif %} 
+        </div>
+        <div class="column2" style="background-image: linear-gradient(to right top, #f5d100 0%, #50cc7f 100%);">
+            {% if validation == 'orders' %}
+            <h2 class="header">Orders</h2>
+            <table id="example" class="table table-bordered" style="text-align: center;">
+                <thead class="tableHead">
+                    <tr>
+                    <th style="text-align: center;">S.No</th>
+                    <th style="text-align: center;">Order Number</th>
+                    <th style="text-align: center;">Customer Name</th>
+                    <th style="text-align: center;">Food item</th>
+                    <th style="text-align: center;">Amount</th>
+                    <th style="text-align: center;">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    <!-- Dynamically change based on the data -->
+                    {% if data %}
+                        {% for getData in data %}
+                        <tr class="record">
+                            <td>{{ forloop.counter }}</td>
+                            <td id="itemName{{ forloop.counter }}">{{ getData.orderNumber }}</td>
+                            <td id="itemdesc{{ forloop.counter }}">{{ getData.customerName }}</td>
+                            <td id="itemtype{{ forloop.counter }}"> <pre><code id="formattedJson{{ forloop.counter }}"></code></pre></td>
+                            <script>
+                                var jsonData = '{{ getData.foodItems|safe }}';
+                                try {
+                                    var parsedData = JSON.parse(jsonData);
+                                    var formattedItems = parsedData.map(function(item) {
+                                        return item.name + ' - Quantity: ' + item.quantity + ' - Price: ' + item.price ;
+                                    });
+                                    var formattedJson = formattedItems.join('\n');
+                                    document.getElementById('formattedJson{{ forloop.counter }}').textContent = formattedJson;
+                                } catch (error) {
+                                    console.error('Error parsing JSON:', error);
+                                }
+                            </script>
+                            <td id="itemprice{{ forloop.counter }}">£{{ getData.orderSubTotal }}</td>
+                            <td id="status{{ forloop.counter }}">
+                                {% if getData.orderMode == 'delivery' %}
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle order-status-button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-orderstatus="{{ getData.orderStatus|lower }}" data-orderid="{{ getData.orderNumber }}" >
+                                            {{ getData.orderStatus }}
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#" data-status="placed">Placed</a>
+                                            <a class="dropdown-item" href="#" data-status="accepted">Accepted</a>
+                                            <a class="dropdown-item" href="#" data-status="in_kitchen">In Kitchen</a>
+                                            <a class="dropdown-item" href="#" data-status="ready_for_collection">Ready for pickup</a>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle order-status-button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-orderstatus="{{ getData.orderStatus|lower }}" data-orderid="{{ getData.orderNumber }}" >
+                                            {{ getData.orderStatus }}
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#" data-status="placed">Placed</a>
+                                            <a class="dropdown-item" href="#" data-status="accepted">Accepted</a>
+                                            <a class="dropdown-item" href="#" data-status="in_kitchen">In Kitchen</a>
+                                            <a class="dropdown-item" href="#" data-status="ready_for_collection">Ready for collection</a>
+                                            <a class="dropdown-item" href="#" data-status="collected">Collected</a>
+                                        </div>
+                                    </div>
+                                {% endif %}   
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+            {% elif validation == 'discount' %}
+            <h2 class="header">Discount</h2>
+            <div class="AddButton">
+                <button type="button" class="btn btn-primary" style="margin-left: 93.4%; background-color: #037c21; color: white;" data-toggle="modal" data-target="#discountModal">
+                    <i class="fa-solid fa-plus"></i> Add Discount
+                </button>
+            </div>
+            <table id="example" class="table table-bordered" style="text-align: center;">
+                <thead class="tableHead">
+                    <tr>
+                    <th style="text-align: center;">S.No</th>
+                    <th style="text-align: center;">Description</th>
+                    <th style="text-align: center;">Off Price</th>
+                    <th style="text-align: center;">Discount Type</th>
+                    <th style="text-align: center;">Operation</th>
+                    <th style="text-align: center;">Spend Amount</th>
+                    <th style="text-align: center;">Coupon Code</th>
+                    <th style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    <!-- Dynamically change based on the data -->
+                    {% if data %}
+                        {% for getData in data %}
+                        <tr class="record">
+                            <td>{{ forloop.counter }}</td>
+                            <td id="itemprice{{ forloop.counter }}">{{ getData.description }}</td>
+                            <td id="itemtype{{ forloop.counter }}"> {{ getData.offPrice }}</td>
+                            <td id="itemName{{ forloop.counter }}">{{ getData.discountType }}</td>
+                            <td id="itemprice{{ forloop.counter }}">{{ getData.operation }}</td>
+                            <td id="status{{ forloop.counter }}">£{{ getData.spendAmount }} </td>
+                            <td id="itemdesc{{ forloop.counter }}">{{ getData.couponCode }}</td>
+                            <td>
+                                <!-- <a href="#" data-toggle="modal" data-target="#editModelItem" id="editItem{{ forloop.counter }}" onclick=loadEditForm()><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp; -->
+                                <a href="discountUpdateOrDelete/{{ getData.discount_id }}" id="discountUpdate{{ forloop.counter }}" class="editDiscount"><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp;
+                                <a href="discountUpdateOrDelete/{{ getData.discount_id }}" id="discountDelete{{ forloop.counter }}"><i class="fa-solid fa-trash" style="color: #e82626;"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+            {% else %}
+                <h2 class="header">Menu Dashboard</h2>
+                <!-- <p><button id="addRow" data-toggle="modal" data-target="#addMenu">Add New</button></p> -->
+                <div class="AddButton">
+                    <button type="button" class="btn btn-primary" style="margin-left: 94.8%; background-color: #037c21; color: white;" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa-solid fa-plus"></i> Add Item
+                    </button>
+                </div>
+                <table id="example" class="table table-bordered" style="text-align: center;">
+                    <thead class="tableHead">
+                        <tr>
+                        <th style="text-align: center;">S.No</th>
+                        <th style="text-align: center;">Menu Name</th>
+                        <th style="text-align: center;">Menu Description</th>
+                        <th style="text-align: center;">Price</th>
+                        <th style="text-align: center;">Menu Type</th>
+                        <th style="text-align: center;">Kcal</th>
+                        <th style="text-align: center;">Food Group</th>
+                        <th style="text-align: center;">Action</th>
+                        <th style="display:none;">Image</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        <!-- Dynamically change based on the data -->
+                        {% if data %}
+                            {% for getData in data %}
+                            <tr class="record">
+                                <td>{{ forloop.counter }}</td>
+                                <td id="itemName{{ forloop.counter }}">{{ getData.itemName }}</td>
+                                <td id="itemdesc{{ forloop.counter }}">{{ getData.itemDescription }}</td>
+                                <td id="itemtype{{ forloop.counter }}">{{ getData.price }}</td>
+                                <td id="itemprice{{ forloop.counter }}">{{ getData.itemType }}</td>
+                                <td id="itemKcal{{ forloop.counter }}">{{ getData.calorie }}</td>
+                                <td id="itemFoodGroup{{ forloop.counter }}">{{ getData.foodGroup }}</td>
+                                <td>
+                                    <!-- <a href="#" data-toggle="modal" data-target="#editModelItem" id="editItem{{ forloop.counter }}" onclick=loadEditForm()><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp; -->
+                                    <a href="updateMenuItem" class="editMenuItem" data-menuid="{{ getData.menu_id }}"><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp;
+                                    <a href="deleteItem/{{ getData.menu_id }}" id="deleteItem{{ forloop.counter }}"><i class="fa-solid fa-trash" style="color: #e82626;"></i></a>
+                                </td>
+                                <td style="display:none;">{{ getData.itemImage }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+    <!-- FOR ADD MENU ITEM FUNCTION -->
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" id="form">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="header">Add Item</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="label">Item Name</label>
+                            <input type="text" class="form-control" id="itemname" >
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Item Description</label>
+                            <textarea class="form-control" id="itemdescription" rows="3" ></textarea>
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="my_input" id="my_input" value="{{ pick }}">
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="label">Food Calorie</label>
+                            <input type="text" class="form-control" id="foodKcal" >
+                        </div> -->
+                        <div class="row">
+                            <div class="col">
+                                <label class="label">Food Group</label>
+                                <select class="form-control" id="foodGroup">
+                                    <option> </option>
+                                    <option>Vegan</option>
+                                    <option>Vegetarian</option>
+                                    <option>Non Vegetarian</option>
+                                </select>
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="label">Food Calorie</label>
+                                <input type="text" class="form-control" id="foodKcal" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="label">Item Type</label>
+                                <select class="form-control" id="itemtype">
+                                    <option> </option>
+                                    <option>Starter</option>
+                                    <option>Main Course</option>
+                                    <option>Dessert</option>
+                                </select>
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="label">Price</label>
+                                <input type="text" class="form-control" id="itemprice">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label>Best Food</label>
+                            <div class="tag-container">
+                            </div>
+                                <input type="text" id="tagInput" class="form-control" placeholder="Enter tags">
+                        </div> -->
+                        <!-- <div class="form-group">
+                            <label>Best Dishes (2 items can be add)</label>
+                            <div class="tags-input-container" id="bestFoodTag">
+                                Best Food tag will added here
+                            </div>
+                            <input type="text" class="form-control" id="tagInput">
+                        </div> -->
+                        <div class="form-group">
+                            <label class="label">Item Image</label><br>
+                            <input type="file" class="form-control-file" id="itemimage">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="addItem" class="btn btn-primary">Add Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- FOR UPDATE FUNCTION -->
+    <div class="modal" id="editModelItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="editForm">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="header">Update Item</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="label">Item Name</label>
+                            <input type="text" class="form-control" id="itemEditName">
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Item Description</label>
+                            <textarea class="form-control" id="itemEditDescription" rows="3" required></textarea>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="my_input">Enter your value:</label>
+                            <input type="hidden" name="my_input" id="my_input" value="{{ pick }}">
+                        </div> -->
+                        <div class="row">
+                            <div class="col">
+                                <label class="label">Item Type</label>
+                                <select class="form-control" id="itemEditType" required>
+                                    <option> </option>
+                                    <option>Starter</option>
+                                    <option>Main Course</option>
+                                    <option>Dessert</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="label">Price</label>
+                                <input type="text" class="form-control" id="itemEditPrice" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="label">Food Group</label>
+                                <select class="form-control" id="updateFoodGroup">
+                                    <option> </option>
+                                    <option>Vegan</option>
+                                    <option>Vegetarian</option>
+                                    <option>Non Vegetarian</option>
+                                </select>
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="label">Food Calorie</label>
+                                <input type="text" class="form-control" id="updateFoodKcal" >
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="label">Food Calorie</label>
+                            <input type="text" class="form-control" id="updateFoodKcal" >
+                        </div> -->
+                        <div class="form-group">
+                            <label class="label">Item Image</label><br>
+                            <input type="file" class="form-control-file" id="itemEditImage">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="modifyChange" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- FOR DISCOUNT -->
+    <!-- <div class="modal" id="discountModal" tabindex="-1" aria-labelledby="discountModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="discountModalLabel">Discount</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+               
+                    <form class="row" id="discountForm">
+                        {% csrf_token %}
+                        <div class="col-md-3">
+                            <label class="form-label">Off Price</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="offprice">
+                            <div class="error"></div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Discount Type</label>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="discountType">
+                                <option value=""></option>
+                                <option value="fixed amount off">£</option>
+                                <option value="percentage off">%</option>
+                            </select>
+                            <div class="error"></div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Operation</label>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="operation">
+                                <option value=""></option>
+                                <option value="greater">Greater Than</option>
+                                <option value="greater or equal">Greater Than or equal</option>
+                            </select>
+                            <div class="error"></div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Spend</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="spend">
+                            <div class="error"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="addDiscount" class="btn btn-primary">Add discount</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="modal" id="discountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" id="discountForm">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="header">Discount</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="label">Off Price</label>
+                            <input type="text" class="form-control" id="offPrice" >
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Discount Type</label><br>
+                            <select class="form-select" id="discountType">
+                                <option value=""></option>
+                                <option value="fixed amount off">£</option>
+                                <option value="percentage off">%</option>
+                            </select>
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Operation</label><br>
+                            <select class="form-select" id="operation">
+                                <option value=""></option>
+                                <option value="greater">Greater Than</option>
+                                <option value="greater or equal">Greater Than or equal</option>
+                            </select>
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="my_input" id="my_input" value="{{ pick }}">
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Spend</label>
+                            <input type="text" class="form-control" id="spend" >
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Description</label>
+                            <input type="text" class="form-control" id="description" >
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Coupon Code</label>
+                            <input type="text" class="form-control" id="couponCode" >
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="addDiscount" class="btn btn-primary">Add Discount</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- DISCOUNT UPDATE -->
+    <div class="modal" id="editDiscountForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" id="editDiscountForm">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5><b>Update Discount</b></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="label">Description</label>
+                                <input type="text" class="form-control" id="updateDescription" >
+                                <div class="error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Off Price</label>
+                                <input type="text" class="form-control" id="updateOffPrice" >
+                                <div class="error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Discount Type</label><br>
+                                <select class="form-select" id="updatDiscountType">
+                                    <option value=""></option>
+                                    <option value="fixed amount off">£</option>
+                                    <option value="percentage off">%</option>
+                                </select>
+                                <div class="error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Operation</label><br>
+                                <select class="form-select" id="updateOperation">
+                                    <option value=""></option>
+                                    <option value="greater">Greater Than</option>
+                                    <option value="greater or equal">Greater Than or equal</option>
+                                </select>
+                                <div class="error"></div>
+                            </div>
+                            <!-- <div class="form-group">
+                                <input type="hidden" name="my_input" id="my_input" value="{{ pick }}">
+                            </div> -->
+                            <div class="form-group">
+                                <label class="label">Spend</label>
+                                <input type="text" class="form-control" id="updateSpend" >
+                                <div class="error"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="label">Coupon Code</label>
+                                <input type="text" class="form-control" id="updateCouponCode" >
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="updateDiscount" class="btn btn-primary">Upadate discount</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

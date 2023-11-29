@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+nav {
+    background: #c5c5c5;
+
+}
+
+nav .logo {
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+nav:after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+nav ul {
+    float: right;
+    list-style: none;
+    margin-right: 30px;
+    position: relative;
+}
+
+nav ul li {
+    text-align: left;
+    display: inline-block;  
+    margin: 0 5px;
+} 
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    line-height: 70px;
+    font-size: 18px;
+    padding: 8px 15px;
+    margin-left: 10px;
+    border-radius: 30px;
+}
+
+nav ul li a:hover {
+    color: #037c21;
+    box-shadow: 0 0 5px #037c21,
+                0 0 5px #037c21;
+}
+
+.card-stepper {
+    z-index: 0
+    }
+    
+    #progressbar-2 {
+    color: #455A64;
+    }
+    
+    #progressbar-2 li {
+    list-style-type: none;
+    font-size: 13px;
+    width: 33.33%;
+    float: left;
+    position: relative;
+    }
+    
+    #progressbar-2 #step1:before,
+    #progressbar-2 #step2:before,
+    #progressbar-2 #step3:before,
+    #progressbar-2 #step4:before,
+    #progressbar-2 #step5:before {
+        content: '\f058';
+        font-family: "Font Awesome 5 Free";
+        color: #fff;
+        width: 37px;
+        margin-right: 0;
+        text-align: center;
+    }
+    
+    #progressbar-2 li:before {
+    line-height: 37px;
+    display: block;
+    font-size: 12px;
+    background: #c5cae9;
+    border-radius: 50%;
+    }
+    
+    #progressbar-2 li:after {
+    content: '';
+    width: 100%;
+    height: 10px;
+    background: #c5cae9;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 15px;
+    z-index: -1;
+    }
+    
+    #progressbar-2 li:nth-child(1):after,
+     #progressbar-2 li:nth-child(2):after, 
+     #progressbar-2 li:nth-child(3):after, 
+     #progressbar-2 li:nth-child(4):after {
+    left: 1%;
+    width: 100%
+    }
+        
+    #progressbar-2 li:nth-child(5) {
+    left: 0;
+    width: 37px;
+    }
+    
+    #progressbar-2 li:nth-child(5):after {
+    left: 0;
+    width: 0;
+    }
+    
+    #progressbar-2 li.active {
+        content: '\f111';
+    }
+
+    #progressbar-2 li.active:before,
+    #progressbar-2 li.active:after {
+    background: #85cd56;
+    }
+
+.sendMail {
+    width: 350px; 
+    margin-top: 20px; 
+    height: 40px; 
+    background-color: #037c21; 
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.form-label, .modal-title {
+    font-weight: bold;
+}
+
+.rating-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.emoji-rating {
+    display: flex;
+    gap: 20px;
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+.emoji {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.emoji.selected, .emoji:hover {
+    transform: scale(1.2);
+}
+
+
+.feedback-section {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#feedbackTextarea {
+    width: 100%;
+    padding: 10px;
+    resize: vertical;
+}
+
+#submitFeedbackBtn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #85cd56;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#submitFeedbackBtn:hover {
+    background-color: #70ad47;
+}

@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>YummiLicious</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/restaurantMenuPage.css' %}">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+    <link rel="icon" href="{% static 'images/mainLogo.png' %}">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" defer src="{% static 'js/restaurantMenuLanding.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+    <body style="background-image: linear-gradient(to bottom, #50cc7f 0%, #f5d100 100%);">
+      <nav>
+        <div class="logo">
+            <img src="{% static 'images/CoolBrand.png' %}" height="70"  alt="CoolBrand">
+        </div>
+        <!-- <ul>
+          <li>
+            <div class="search-bar"><i class="fa-solid fa-magnifying-glass"></i> <input type="search" placeholder="Search for a food"></div>
+          </li>
+          <li>
+            <a href="#"><i class="fa-solid fa-cart-shopping"></i>&ensp;Cart</a>
+          </li>
+        </ul> -->
+      </nav>
+      <div class="container-fluid" style="display: flex; flex-direction: column; height: 100vh;">
+        <div class="row" style="flex: 0 0 25%;">
+          <div class="col-md-12" style="border-bottom: 1px solid #f5d100;" >
+            <div class="row">
+              <a class="backLink"><i class="fa-solid fa-arrow-left"></i> Back</a>
+              {% if data %}
+                  {% csrf_token %}
+                  <div class="col-md-2 product-image" style="margin-top: 5px;">
+                    <img src="{% static 'images/HomePage.jpg' %}" alt="Product Image" >
+                  </div>
+                  <div class="col-md-6 product-info" style="margin-top: 15px;">
+                    <h1>{{ data.restaurantName }}</h1>
+                    <h3 style="margin-top: 30px;">{{ data.cuisineType }}</h3>
+                    <p><i class="fa-solid fa-location-dot"></i> {{ data.city }}</p>
+                    <p>
+                      <span> £12.00 minimum</span>
+                      <span style="margin-left: 20px;"> £1.89 delivery</span>
+                    </p>
+                  </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="row" style="flex: 1;">
+          <div class="col-md-8" style="height: 100%;">
+            {% if menuData %}
+              <div class="row">
+                <h1 class="itemHeader">Starter</h1>
+                {% for getData in menuData %}
+                  {% if getData.itemType == 'Starter' %}
+                    <div class="card mb-2 foodAdd clickable-card" data-bs-toggle="modal" data-bs-target="#itemModal"
+                      data-name="{{ getData.itemName }}" data-description="{{ getData.itemDescription }}" data-price="{{ getData.price }}" data-calorie="{{ getData.calorie }}"
+                      data-food="{{ getData.foodGroup }}" data-phone="{{ data.phoneNumber }}" data-postcode="{{ data.postcode }}" data-city="{{ data.city }}"
+                      data-address="{{ data.restaurantAddress }}" data-restaurantname="{{ data.restaurantName }}" style="max-width: 540px;">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{% static 'images/mk.jpeg' %}" class="img-fluid img-thumbnail ">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ getData.itemName }}</h5>
+                            <p class="card-text">{{ getData.itemDescription }}</p>
+                            <p class="card-text price-container">£{{ getData.price }} 
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+                <h1 class="itemHeader">Main Course</h1>
+                {% for getData in menuData %}
+                  {% if getData.itemType == 'Main Course' %}
+                    <div class="card mb-2 foodAdd clickable-card" data-bs-toggle="modal" data-bs-target="#itemModal"
+                      data-name="{{ getData.itemName }}" data-description="{{ getData.itemDescription }}" data-price="{{ getData.price }}" data-calorie="{{ getData.calorie }}" 
+                      data-food="{{ getData.foodGroup }}" data-phone="{{ data.phoneNumber }}" data-postcode="{{ data.postcode }}" data-city="{{ data.city }}" 
+                      data-restaurantname="{{ data.restaurantName }}" data-address="{{ data.restaurantAddress }}" style="max-width: 540px;">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img src="{% static 'images/mk.jpeg' %}" class="img-fluid img-thumbnail ">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ getData.itemName }}</h5>
+                            <p class="card-text">{{ getData.itemDescription }}</p>
+                            <p class="card-text price-container">£{{ getData.price }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+                <h1 class="itemHeader">Dessert</h1>
+                {% for getData in menuData %}
+                  {% if getData.itemType == 'Dessert' %}
+                    <div class="card mb-2 foodAdd clickable-card" data-bs-toggle="modal" data-bs-target="#itemModal"
+                      data-name="{{ getData.itemName }}" data-description="{{ getData.itemDescription }}" data-price="{{ getData.price }}" data-calorie="{{ getData.calorie }}"
+                      data-food="{{ getData.foodGroup }}" data-phone="{{ data.phoneNumber }}" data-postcode="{{ data.postcode }}" data-city="{{ data.city }}" 
+                      data-restaurantname="{{ data.restaurantName }}" data-address="{{ data.restaurantAddress }}" style="max-width: 540px;">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img src="{% static 'images/mk.jpeg' %}" class="img-fluid img-thumbnail ">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ getData.itemName }}</h5>
+                            <p class="card-text">{{ getData.itemDescription }}</p>
+                            <p class="card-text price-container">£{{ getData.price }}</p> 
+                            <p class="card-text hidden-paragraph" style="visibility: hidden; display: none;">{{ getData.calorie }}</p>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %} 
+          </div>
+          <div class="col-md-4" style="height: 100%;">
+            <div id="csrf">
+              {% csrf_token %}
+          </div>
+            <div class="order-container" style="background-color: aliceblue;">
+              <h1 style="text-align: center;">Order Total</h1>
+              <hr>
+              <div class="selected-list">      
+              </div>             
+              <div class="totals">
+                <div class="subtotal">
+                  <span>Subtotal</span>
+                  <span class="subAmount">£0.00</span>
+                </div>
+                <div class="service" style="display: none;">
+                  <span>Service fee</span>
+                  <span class="serviceAmount">£0.00</span>
+                </div>
+                <div class="delivery" style="display: none;">
+                  <span>Delivery fee</span>
+                  <span class="deliveryAmount">£0.00</span>
+                </div>
+                <div class="total" style="display: none;">
+                  <span>Total</span>
+                  <span class="amount">£0.00</span>
+                </div>
+              </div>
+              <hr>              
+                <button class="checkout-btn">Proceed to checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="itemModalLabel"><b>Item Details</b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="max-height: 50vh; overflow-y: auto;">
+              <div class="col-md-12">
+                <img src="{% static 'images/mk.jpeg' %}" class="img-fluid img-thumbnail">
+              </div>
+              <h5 class="card-title restaurantName" id="modalItemName" style="margin-top: 20px;"></h5>
+              <p class="card-text" id="modalItemDescription" style="margin-top: 30px;">
+              </p>
+              <p class="card-text price-container" id="modalItemPrice"></p>
+              <p class="card-text hidden-paragraph" id="modalItemKcal"></p>
+              <p class="card-text hidden-paragraph" id="modalItemFoodGroup"></p>
+
+              <hr>
+
+              <p>
+                  Questions about allergens, ingredients or cooking methods?
+                  <a href="#" id="contactLink" style="color: #037c21;">Please contact the restaurant</a>
+              </p>
+
+              <div id="contactInfo" style="display: none; color: #037c21;">
+                <p><i class="fa-solid fa-location-dot" style="color: #037c21;"></i>&ensp;<span id="restaurantAddress"></span></p>
+                <p><i class="fa-solid fa-phone" style="color: #037c21;"></i>&ensp;<span id="restaurantPhone" style="cursor: pointer;"></span></p>
+              </div>
+
+              <hr>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center align-items-center flex-column">
+              <div class="d-flex align-items-center">
+                <button class="minus-btn button" style="margin-right: 20px;">-</button>
+                <span class="quantity">1</span>
+                <button class="plus-btn button" style="margin-left: 20px;">+</button>
+              </div>
+              <div>
+                <button class="addMenuItem" id="addItemButton">
+                   
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
+

@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  /* font-family: Roboto; [mkeny - regular, restaurant name/form - light]*/ 
+  font-family: 'Roboto', sans-serif;
+
+}
+.navbar {
+  background-color: #f8f8f8;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* .navbar-brand {
+  height: 150px;
+} */
+/* 
+.navbar-menu {
+  font-size: 16px;
+}
+
+.navbar-menu a {
+  margin-left: 20px;
+  color: #333;
+  text-decoration: none;
+}
+
+.navbar-menu a:hover {
+  color: #000;
+}
+
+.navbar-signin {
+  font-weight: bold;
+} */
+/* .body{
+  background: url('C:\Users\91958\Desktop\Project\code\trunk\code\takeAwayMenuSystem\mainFrame\taskasserts\log.png');
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+} */
+/* .bg-img:after{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+} */
+.divBar {
+  min-height: 93.3vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* background: #f5d100; */
+  /* background: rgb(34,193,195); */
+/* background: linear-gradient(232deg, rgba(34,193,195,1) 0%, rgba(204,184,217,1) 100%); */
+/* background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%); */
+  background-image: linear-gradient(to right, #50cc7f 0%, #f5d100 100%);
+}
+.container {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  background-image: linear-gradient(to right top, #f5d100 0%, #50cc7f 100%);
+  /* background: #50cc7f; */
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+}
+.container .form {
+    margin-top: 30px;
+  }
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #333;
+  font-weight: 600;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.text-center {
+  text-align: center;
+}
+.form button {
+  height: 55px;
+  width: 50%;
+  color: #f2f2f2f2;
+  /* color: #0f0f0ff2; */
+  border-radius: 60px;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* background: rgb(130, 106, 251); */
+  background: #064e10;
+}
+.form button:hover {
+  /* background: rgb(88, 56, 250); */
+  background: #037c21;
+}
+.register{
+  margin: 20px 0;
+  text-align: center;
+  font-weight: 400;
+}
+.forgot-pass{
+    margin: 10px 0;
+    text-align: right;
+    font-weight: 600;
+    font-size: 15px;
+}
+.input-box input:focus {
+  outline: 0;
+}
+
+.input-box.success input {
+  border-color: #09c372;
+}
+
+.input-box.error input {
+  border-color: #ff3860;
+}
+
+.input-box .error {
+  color: #eb274e;
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+::placeholder {
+  opacity: 0.3; 
+}

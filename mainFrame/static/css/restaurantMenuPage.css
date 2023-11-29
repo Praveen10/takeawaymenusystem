@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* body {
+    background: #9f654f;
+} */
+
+nav {
+    background: #c5c5c5;
+    color: hsl(249, 30%, 17%);
+}
+
+nav:after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+nav ul {
+    float: right;
+    list-style: none;
+    margin-right: 30px;
+    position: relative;
+}
+
+nav ul li {
+    text-align: left;
+    display: inline-block;  
+    margin: 0 5px;
+} 
+
+.search-bar {
+    background-color: hsl(249, 30%, 95%);
+    border-radius: 2rem;
+    padding: 0.6rem 1rem;
+    margin-top: 20px;
+}
+
+.search-bar input[type="search"] {
+    background: transparent;
+    width: 20vw;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    border: none;
+    color: black;
+    outline-width: 0;
+}
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    line-height: 70px;
+    font-size: 18px;
+    padding: 8px 15px;
+    margin-left: 10px;
+    border-radius: 30px;
+}
+
+nav ul li a:hover {
+    color: #037c21;
+    box-shadow: 0 0 5px #037c21,
+                0 0 5px #037c21;
+}
+
+nav .logo {
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+nav .bar {
+    float: left;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.product-details,
+.order-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.product-image {
+  height: 200px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+.product-image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.product-info h4,
+.product-info p {
+  margin-bottom: 10px;
+}
+
+.itemHeader {
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.order-section > div {
+  margin-bottom: 20px;
+}
+
+
+.details, .order-total {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+
+.product-info h4 {
+  font-size: 24px;
+  color: #333;
+}
+
+.product-info p {
+  font-size: 16px;
+  color: #555;
+}
+
+.backLink {
+    margin-top: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 20px;
+    /* color: #037c21; */
+}
+
+.mb-2 {
+    margin-left: 50px;
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+/* .foodAdd{
+    margin-left: 184px;
+    border-radius: 20px;
+    gap: 20px;
+} */
+
+.img-thumbnail {
+    margin-top: 13px;
+}
+
+.price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.order-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 90px;
+    border-radius: 20px;
+}
+
+.order-container h1 {
+    margin-bottom: 20px;
+}
+
+.selected-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+}
+
+.selected-item .item{
+    font-weight: bold;
+    width: 130px;
+
+}
+
+.selected-item .button {
+    border: none;
+    background-color: #037c21;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.selected-item .quantity {
+    width: 20px;
+    text-align: center;
+    border: none;
+    margin: 0 -50px;
+}
+
+.totals {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.totals div {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.total {
+    font-weight: bold;
+}
+
+.totals span.amount span.subAmount {
+    text-align: right;
+}
+
+.checkout-btn {
+    border: none;
+    background-color: #037c21;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.button {
+    border: none;
+    background-color: #037c21;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.clickable-card {
+    cursor: pointer;
+  }
+
+.addMenuItem {
+    width: 350px; 
+    margin-top: 20px; 
+    height: 50px; 
+    background-color: #037c21; 
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.hidden-paragraph {
+    display: inline-block;
+    margin-right: 10px; /* Adjust the spacing between elements as needed */
+  }

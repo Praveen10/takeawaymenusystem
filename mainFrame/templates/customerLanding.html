@@ -1,0 +1,320 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>YummiLicious</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/customerLanding.css' %}">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+  <link rel="icon" href="{% static 'images/mainLogo.png' %}">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer type="text/javascript" defer src="{% static 'js/customerLanding.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+    <body>
+        <nav>
+            <!-- <div class="bar">
+                <i class="fa-solid fa-bars fa-xl"></i>
+            </div> -->
+            <div class="logo">
+                <img src="{% static 'images/CoolBrand.png' %}" height="60"  alt="CoolBrand">
+            </div>
+            <!-- <div class="toggle-status">
+                <div class="button-box">
+                    <div id="btn"></div>
+                    <button type="button" class="toggle-btn" onclick="leftClick()">Delivery</button>
+                    <button type="button" class="toggle-btn" onclick="rightClick()">Pickup</button>
+                </div>
+            </div> -->
+            <ul>
+                <li>
+                    <div class="search-bar"><i class="fa-solid fa-magnifying-glass"></i> <input type="search" id="searchInput" placeholder="Search for a food"></div>
+                </li>
+                <li>
+                    <a href="customerLogout/{{ customerId }}"><i class="fa-solid fa-right-from-bracket"></i></i>&ensp;Logout</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="column1" style="background-image: linear-gradient(to bottom, #50cc7f 0%, #f5d100 100%)">
+                {% if validation == 'profile' %}
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{% url 'customerProfile' id=customerId %}"> 
+                            <i class="fa-solid fa-house"></i>Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 " href="{% url 'customerLanding' id=customerId %}">
+                            <i class="fa-solid fa-bell-concierge"></i>Orders
+                        </a>
+                    </li>    
+                </ul> 
+            {% else %}
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 " aria-current="page" href="{% url 'customerProfile' id=customerId %}">
+                        <i class="fa-solid fa-house"></i>Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 active" href="{% url 'customerLanding' id=customerId %}">
+                        <i class="fa-solid fa-bell-concierge"></i>Orders
+                    </a>
+                </li>
+            </ul> 
+            <div class="sorting-section" style="margin-top: 15px; margin-left: 15px;">
+                <h5><b>Sort Orders</b></h5>
+                <label>
+                    <input type="radio" name="sortOrders" value="topRated"> Top Rated
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="sortOrders" value="hygineRating"> Hygine Rating
+                </label>
+            </div>
+
+            <div class="category-section" style="margin-top: 15px; margin-left: 15px;">
+                <h5><b>Categories</b></h5>
+                <label>
+                    <input type="checkbox" name="categories" value="British"> British
+                </label><br>
+                <label>
+                    <input type="checkbox" name="categories" value="Indian"> Indian
+                </label><br>
+                <label>
+                    <input type="checkbox" name="categories" value="Italian"> Italian
+                </label><br>
+                <label>
+                    <input type="checkbox" name="categories" value="American"> American
+                </label><br>
+                <label>
+                    <input type="checkbox" name="categories" value="Thai"> Thai
+                </label><br>
+                <label>
+                    <input type="checkbox" name="categories" value="Chinese"> Chinese
+                </label><br>
+                <label>
+                    <input type="checkbox" name="categories" value="Turkish"> Turkish
+                </label>
+            </div>
+            {% endif %} 
+            </div>
+            <div class="column2" style="background-image: linear-gradient(to bottom, #50cc7f 0%, #f5d100 100%)">
+              <!-- {% static 'images/HomePage.jpg' %}
+              {% static 'images/turkey.jpg' %} -->
+              {% if validation == 'profile' %}
+              <div class="container">
+                <div class="main-body">                   
+                    <div class="row gutters-sm" style="margin-top: 250px;">
+                        <div class="col-md-4 mb-3">
+                            <div class="card" style="height: 600px;">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center" style="margin-top: 100px;">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                        <div class="mt-3">
+                                        <h4 style="margin-top: 35px;">{{ data.firstname }} {{ data.lastname }}</h4>
+                                        <p class="text-muted mb-1">{{ data.email }}</p>
+                                        <p class="text-muted font-size-sm"></p>
+                                        <button class="btn custom-color" id="editButton"><i class="fa-regular fa-pen-to-square"></i>&ensp; Edit</button>
+                                        <button class="btn outline-custom-color" data-bs-toggle="modal" data-bs-target="#resetModal"><i class="fa-solid fa-key"></i>&ensp; Reset</button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>                       
+                        <div class="col-md-8">
+                            <div class="card mb-3">
+                                <div class="card-body informationBody" style="height: 600px;">
+                                    <h3 style="margin-top: 20px;"><b>Information</b></h3>
+                                    <hr>
+                                    
+                                    <div class="row" style="margin-top: 90px;">
+                                        <div class="col-sm-3">
+                                        <h6 class="mb-0">First Name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                        {{ data.firstname }} 
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                        <h6 class="mb-0">Last Name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                        {{ data.lastname }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                        <h6 class="mb-0">Email</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{ data.email }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{ data.phone }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row" id="dobRow">
+                                        <div class="col-sm-3">
+                                        <h6 class="mb-0">Street</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{ customerAddress.street }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row" id="vehicleTypeRow">
+                                        <div class="col-sm-3">
+                                        <h6 class="mb-0">City</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{ customerAddress.city }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                        <h6 class="mb-0">Postcode</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{ customerAddress.postcode }}
+                                        </div>
+                                    </div>
+                                    <!-- <hr> -->
+                                    
+                                    <div id="submitButtonRow" class="row" style="display: none;">
+                                        <div class="col-sm-12 text-end">
+                                            <button class="btn custom-color" id="submitButton" style="margin-top: 25px;"><i class="fa-solid fa-check"></i>&ensp; Submit</button>
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </div>
+                        </div>         
+                    </div>
+                </div>
+            </div>
+              {% else %}
+              <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <div id="dynamic-indicators"></div>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" id="carousel-item-1" data-bs-interval="2000">
+                        <img src="{% static 'images/ben.jpeg' %}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                    </div>
+                    <div class="carousel-item" id="carousel-item-2" data-bs-interval="2000">
+                        <img src="{% static 'images/sas.jpeg' %}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                    </div>
+                    <div class="carousel-item" id="carousel-item-2" data-bs-interval="2000">
+                        <img src="{% static 'images/discount.svg' %}" class="d-block w-100 h-50" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                        <!-- <h2>Discount Offer</h2> -->
+                        {% if discount %}
+                            {% for getDiscount in discount %}
+                                <h3 style="margin-top: 15px;">Code : {{ getDiscount.couponCode }}</h3>
+                                <h3 style="margin-top: 15px;">{{ getDiscount.description }}</h3>
+                                <h3 style="margin-top: 15px;">{{ getDiscount.discountType }}</h3>
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                
+            </div>
+                <!-- <h2 style="margin-top: 15px;"><b>Popular near you</b></h2> -->
+                <div class="container-fluid">
+                    <div class="row">
+                        {% if data %}
+                            {% for getData in data %}
+                                {% csrf_token %}
+                                <div class="col-md-3">
+                                    <div class="card-wrapper">
+                                        <div class="card clickable-card" id="restaurantCard{{ forloop.counter }}" data-cuisine="{{ getData.cuisineType }}" data-hygine="{{ getData.hygineRating }}" data-rating="{{ getData.rating }}">
+                                            <img src="{% static 'images/mk.jpeg' %}" class="card-img-top" alt="...">
+                                            <!-- <div id="map{{ forloop.counter }}" class="leaflet-map"></div> -->
+                                            <div class="card-body">
+                                                <h5 class="card-title" id="restCardName">{{ getData.restaurantName }}</h5>
+                                                <p class="card-text">{{ getData.cuisineType }} 
+                                                    {% if getData.foodTag %}
+                                                    | <span class="food-tag">{{ getData.foodTag.tag1 }}</span> | <span class="food-tag">{{ getData.foodTag.tag2 }}</span>
+                                                    {% endif %}
+                                                </p>
+                                                {% if getData.rating %}
+                                                    <p class="card-text" style="color: red;"><i class="fa-regular fa-star"></i> {{ getData.rating }}&ensp;({{ getData.count }}) </p>
+                                                {% else %}
+                                                    <p class="card-text" style="color: red;"><i class="fa-regular fa-star"></i> New on YummiLicious</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="modal fade" id="resetModal" tabindex="-1" aria-labelledby="resetModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="resetModalLabel">Reset Password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="resetForm">
+                            <div class="form-group">
+                                <label for="newPassword">New Password:</label>
+                                <input type="password" id="newPassword" name="newPassword" class="form-control" required>
+                                <small id="newPasswordError" class="text-danger"></small> 
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password:</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+                                <small id="confirmPasswordError" class="text-danger"></small>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn custom-color" id="submitPassword">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,125 @@
+<!-- <h1>Login</h1> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>YummiLicious</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="{% static 'css/restaurantRegistration.css' %}">
+  <script type="text/javascript" defer src="{% static 'js/restaurantRegistration.js' %}"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a href="#" class="navbar-brand">
+        <img src="{% static 'images/CoolBrand.png' %}" height="70"  alt="CoolBrand">
+      </a>
+      <ul>
+          <li>
+              <a href="{% url 'restaurantLogin' %}">Login</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+  <div class="divBar"> 
+    <section class="container">
+      <header>Join YummiLicious</header>
+        <form method="POST" action="" id="form" class="form">
+			      {% csrf_token %}
+            <div class="step step-1 active">
+                <!-- <div class="tittle"><header>Personal Information</header></div> -->
+                <div class="column">
+                    <div class="input-box">
+                        <label>First Name</label>
+                        <input id="firstname"  type="text" placeholder="Joe" name='firstName'>
+                        <div class="error"></div>
+                    </div>
+                    <div class="input-box">
+                        <label>Last Name</label>
+                        <input id="lastname" type="text" placeholder="Dee" name='lastName' >
+                        <div class="error"></div>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label>Email</label>
+                    <input id="email" type="email" placeholder="joe@gmail.com" name='emailAddress' >
+                    <div class="error"></div>
+                </div>
+                <div class="input-box">
+                  <label>Contact Number</label>
+                  <input id="phnumber" type="text" placeholder="1515151151" name='phnumber' >
+                  <div class="error"></div>
+                </div>
+                <div class="column">
+                  <div class="input-box">
+                      <label>Password</label>
+                      <input id="password" type="password" placeholder="******" name='password' >
+                      <div class="error"></div>
+                  </div>
+                  <div class="input-box">
+                      <label>Confirm Password</label>
+                      <input id="cnfrmpassword" type="password" placeholder="******" name='password' >
+                      <div class="error"></div>
+                  </div>
+              </div>
+                <div class="text-center">
+                  <button id="next" type="button" class="next-btn">Next</button>
+                </div>
+            </div>
+
+            <div class="step step-2">
+              <div class="input-box">
+                  <label>Restaurant Name</label>
+                  <input id="restaurantname" type="text" placeholder="chill sizzle" name='restaurantname' >
+                  <div class="error"></div>
+              </div>
+              <div class="input-box">
+                  <label>Restaurant Address</label>
+                  <input id="restaurantaddress" type="text" placeholder="20, midstreet" name='restaurantaddress' >
+                  <div class="error"></div>
+              </div>
+              <div class="column">
+                <div class="input-box">
+                    <label>City</label>
+                    <input id="city"  type="text" placeholder="Oxford" name='city'>
+                    <div class="error"></div>
+                </div>
+                <div class="input-box">
+                    <label>Post code</label>
+                    <input id="postcode" type="text" placeholder="AB1 1GH" name='postcode' >
+                    <div class="error"></div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input-box">
+                  <label>Cusine Type</label>
+                  <input id="cusinetype" type="text" placeholder="British" name='cusinetype' >
+                  <div class="error"></div>
+                </div>
+                <div class="input-box">
+                  <label>Hygine Rating</label>
+                  <select id="hygineRating" name="hygineRating">
+                    <option></option>
+                    <option>5</option>
+                    <option>4</option>
+                    <option>3</option>
+                    <option>2</option>
+                    <option>1</option>
+                  </select>
+                  <div class="error"></div>
+                </div>
+              </div>
+            <button type="button" class="previous-btn">Prev</button>
+            <button id="submit" type="submit" class="submit-btn">Submit</button>
+          </div>
+			<!-- <div class="text-center">
+				<button id="submit">Register</button>
+			</div>
+			<div class="sign-up">
+				Already have an account? <a href="{% url 'login' %}">Login</a>
+			</div> -->
+  </div>
+</body>
+</html>

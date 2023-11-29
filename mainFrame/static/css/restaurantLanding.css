@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+nav {
+    background: #f8f8f8;
+    color: hsl(249, 30%, 17%);
+}
+
+nav:after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+nav ul {
+    float: right;
+    list-style: none;
+    margin-right: 30px;
+    position: relative;
+}
+
+nav ul li {
+    text-align: left;
+    display: inline-block;  
+    margin: 0 5px;
+} 
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    line-height: 70px;
+    font-size: 18px;
+    padding: 8px 15px;
+    margin-left: 10px;
+    border-radius: 30px;
+}
+
+nav ul li a:hover {
+    color: #037c21;
+    box-shadow: 0 0 5px #037c21,
+                0 0 5px #037c21;
+}
+
+nav .logo {
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+/* nav .bar {
+    float: left;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+ */
+
+
+.column1 {
+    float: left;
+    width: 10%;
+    padding: 10px;
+    height: 91vh; 
+    /* background-image: linear-gradient(to right, #50cc7f 0%, #f5d100 100%); */
+}
+
+.column1 a {
+    display: block;
+    padding: 10px;
+    color: #000;
+    border-radius: 30px;
+    text-decoration: none;
+    /* width: 120%; */
+}
+.column1 a.active {
+    background-color: #037c21;
+    color: #fff;
+}
+  
+.column2 {
+    float: left;
+    width: 90%;
+    padding: 10px;
+    height: 91vh; 
+    /* background-image: linear-gradient(to right, #50cc7f 0%, #f5d100 100%); */
+}
+  
+.roww:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.page-item.active .page-link {
+    columns: #fff;
+    background-color: #c5c5c5;
+    border: #c5c5c5;
+}
+
+.pagination > li > a {
+    background-color: #fff;
+    color: #c5c5c5;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > span > a:focus,
+.pagination > span > a:hover {
+    color: black;
+    background-color: #d3d3d3;
+    border: 1px solid #c5c5c5;
+    box-shadow: none;
+}
+
+.dataTables_paginate {
+    margin-top: 10px !important;
+    /* margin-right: 10px !important; */
+}
+
+.dataTables_filter {
+    margin-bottom: 10px !important;
+    /* margin-right: 10px !important; */
+}
+
+table.table tr th {
+    background: #064e10;
+    color:white !important;
+}
+
+.dt-buttons {
+    /* padding: 5px 10px; */
+    /* margin: 10px 3px 10px 0; */
+    margin-top: 10px;
+}
+
+/* .dataTables_length {
+    margin-bottom: 10px !important;
+} */
+
+.header{
+    font-weight: 600;
+}
+.label{
+    font-weight: bold;
+}
+
+.form-group {
+    margin-top: 5px;
+}
+
+.modal-body .row {
+    margin-top: 10px;
+}
+
+.modal-body .custom-file {
+    margin-top: 100px;
+}
+
+.form-group .form-control-file {
+    margin-top: 5px;
+}
+
+.AddButton{
+    
+    margin-bottom: 10px;
+    margin-top: 20px;
+    /* background-color: #037c21;
+    color: white; */
+}
+
+.form-group input:focus {
+    outline: 0;
+}
+
+.form-group.success input {
+    border-color: #09c372;
+}
+
+.form-group.error input {
+    border-color: #ff3860;
+}
+
+.form-group.success .form-control {
+    border-color: #09c372;
+}
+
+.form-group.error .form-control, .form-group.error .form-select {
+    border-color: #ff3860;
+}
+
+.form-group .error {
+    color: #eb274e;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.row .col.success .form-control {
+    border-color: #09c372;
+}
+
+.row .col.error .form-control {
+    border-color: #ff3860;
+}
+
+.form-group .error {
+    color: #eb274e;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.row .col .error {
+    color: #eb274e;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.tag-container {
+    border:transparent;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+
+.tag {
+     background-color: #dcf793;
+    padding: 3px 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.tag-text {
+    margin-right: 4px;
+}
+
+.tag-remove {
+    cursor: pointer;
+    color: rgb(8, 8, 8);
+    font-weight: bold;
+}
+
+.tagCheck {
+    display: inline-block;
+      padding: 5px 10px;
+      margin: 3px;
+      background-color: #3498db;
+      color: white;
+      border-radius: 5px;
+}

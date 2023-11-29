@@ -1,0 +1,327 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>YummiLicious</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/checkoutPage.css' %}">
+
+        <link rel="icon" href="{% static 'images/mainLogo.png' %}">
+
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- new -->
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" defer src="{% static 'js/checkoutPage.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> <!-- new -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    </head>
+    <body style="background-image: linear-gradient(to bottom, #50cc7f 0%, #f5d100 100%);">
+        <nav >
+            <div class="logo">
+                <img src="{% static 'images/CoolBrand.png' %}" height="70"  alt="CoolBrand">
+            </div>
+        </nav>
+
+        <!-- <h1 style="margin-top: 20px;">Restaurant Name</h1>
+        <div class="container-fluid" style="display: flex; flex-direction: column; height: 100vh;">
+            <div class="row" style="flex: 1;">
+                <div class="col-md-8" style="height: 100%;">
+                    <div class="row">
+                        <div class="container md-4 " style="margin-left: 70px; width: 70%;">
+                            <div class="card addressCard">
+                              <div class="card-header">
+                                Address
+                              </div>
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <label for="street">Street</label>
+                                    <input type="text" class="form-control" id="street" placeholder="Street Name">
+                                    
+                                    <label for="city">City</label>
+                                    <input type="text" class="form-control" id="city" placeholder="City">
+                                    
+                                    <label for="postcode">Post Code</label>
+                                    <input type="text" class="form-control" id="postcode" placeholder="Post Code">
+                                  </div>
+                                  <div class="col-md-8">
+                                    <label for="instructions">Delivery Instruction</label>
+                                    <textarea class="form-control" id="instructions" rows="5" placeholder="Delivery Instructions"></textarea>
+
+                                    <button class="address-btn">Submit</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-md-4" style="height: 100%;">
+                    <div id="csrf">
+                        {% csrf_token %}
+                    </div>
+                    <div class="order-container" style="background-color: aliceblue;">
+                        <h1 style="text-align: center;">Order Total</h1>
+                        <hr>
+                        <div class="selected-list">      
+                        </div>             
+                        <div class="totals">
+                            <div class="subtotal">
+                            <span>Subtotal</span>
+                            <span class="subAmount">£0.00</span>
+                            </div>
+                            <div>
+                            <span>Service fee</span>
+                            <span class="serviceAmount">£2.50</span>
+                            </div>
+                            <div>
+                            <span>Delivery fee</span>
+                            <span class="deliveryAmount">£1.89</span>
+                            </div>
+                            <div class="total">
+                            <span>Total</span>
+                            <span class="amount">£0.00</span>
+                            </div>
+                        </div>
+                        <hr>              
+                        <button class="checkout-btn">Proceed to checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="pb-5">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5" style="margin-top: 20px;">
+        
+                  <!-- Shopping cart table -->
+                  <div class="table-responsive">
+                    <table class="table">
+                        <thead class="tableHead">
+                            <tr>
+                            <th style="text-align: center; background-color: #037c21; color: #fff;">Items</th>
+                            <th style="text-align: center; background-color: #037c21; color: #fff;">Price</th>
+                            <th style="text-align: center; background-color: #037c21; color: #fff;">Quantity</th>
+                            <th style="display:none;">token</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody">
+  
+                            <!-- {% if check.foodItems %}                             
+                                <tr class="record">
+                                    <td style="text-align: center; font-weight: bold;">{{ check.foodItems }}</td>
+                                    <td id="itemName{{ forloop.counter }}" style="text-align: center;">{{ check.foodItems.price }}</td>
+                                    <td id="itemName{{ forloop.counter }}" style="text-align: center;"><button class="minus-btn button">-</button>&ensp;{{ check.foodItems.quantity }}&ensp;<button class="plus-btn button">+</button></td>
+                                    <td style="display:none;"></td>
+                                </tr>
+                                {% endif %} -->
+  
+                        </tbody>
+                        <script>
+                          var foodItems = JSON.parse('{{ check.foodItems|escapejs }}');  
+
+                          for (var i = 0; i < foodItems.length; i++) {
+                              var item = foodItems[i];
+                              var price = parseFloat(item.price).toFixed(2);
+                              var row = '<tr class="record">' +
+                                        '<td style="text-align: center; font-weight: bold;">' + item.name + '</td>' +
+                                        '<td id="itemName' + i + '" style="text-align: center;">£' + price + '</td>' +
+                                        '<td id="itemName' + i + '" style="text-align: center;">' + item.quantity + '</td>' +
+                                        '<td style="display:none;"></td>' +
+                                        '</tr>';
+                              document.querySelector('.tbody').insertAdjacentHTML('beforeend', row);
+                          }
+                          </script>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+        
+              <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                <div class="col-lg-6">
+                  <!-- <div class="rounded-pill px-4 py-3 text-uppercase headerCard" style="text-align: center; font-weight: bold;">Coupon code</div> -->
+                  <div class="p-4 modeOrder">
+                    <p class="mb-4 promoPara" style="font-weight: bold;">Mode of order</p>
+                    <label>
+                        <input type="radio" name="orderMode" value="delivery" checked>
+                        Delivery
+                    </label>
+                    <label>
+                        <input type="radio" name="orderMode" value="pickup">
+                        Pickup
+                    </label>
+                </div>
+                  <div class="p-4 loyalityCard">
+                    <p class="mb-4 promoPara" style="font-weight: bold;">Have a promo code .?</p>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                      <input type="text" placeholder="Apply coupon" data-couponcode="{{disc.couponCode}}" data-offprice="{{disc.offPrice}}" data-spendamount="{{disc.spendAmount}}" data-operation="{{disc.operation}}" data-discounttype="{{disc.discountType}}" aria-describedby="button-addon3" class="form-control border-0">
+                      <div class="input-group-append border-0">
+                        <button id="button-addon3" type="button" class="btn coupon px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>&ensp;Apply coupon</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="rounded-pill px-4 py-3 text-uppercase headerCard" style="text-align: center; font-weight: bold;">Delivery Instructions </div>
+                  <div class="p-4">
+                    <textarea name="" cols="30" rows="4" class="form-control"></textarea>
+                  </div> -->
+                  
+                  <!-- <div class="container mt-4">
+                    <div class="card clickable-card" data-toggle="modal" data-target="#addressModal">
+                      <div class="card-body">
+                        <span class="icon">+</span>
+                        <span class="label">Add Address</span>
+                      </div>
+                    </div>
+                  </div> -->
+                  
+                  <div class="card mb-2 foodAdd clickable-card" id="addressModalCard" data-bs-toggle="modal" data-bs-target="#addressModal">
+                    <div class="card-body">
+                      <span class="icon">+</span>&ensp;
+                      <span class="addressLabel"><b>Add Address</b></span>
+                    </div>
+                  </div>
+                  <div class="error-message" id="emptyAddressError" style="display: none; color: red;">
+                    Please fill in the address before placing the order.
+                  </div>
+                  <div class="card mb-2 clickable-card" id="riderInstructionsCard">
+                    <div class="card-body instructionRider" onclick="showTextArea()">
+                        <span class="icon"><i class="fa-regular fa-clipboard"></i></span>&ensp;
+                        <span class="instructionLabel"><b>Add rider instructions</b></span>
+                    </div>
+                  </div>
+                  <div class="p-4 tipCard">
+                    <p class="mb-4 tipPara" style="font-weight: bold;">Select a tip for the rider</p>
+                    <div class="tip-buttons">
+                      <button class="tip-button" data-percentage="0">Not Today</button>
+                      <button class="tip-button" data-percentage="5">5%</button>
+                      <button class="tip-button" data-percentage="10">10%</button>
+                      <button class="tip-button" data-percentage="15">15%</button>
+                      <button class="tip-button" data-percentage="20">20%</button>
+                  </div>
+                </div>
+                </div>
+                <div class="col-lg-6 summaryBox">
+                    <!-- <div class="rounded-pill px-4 py-3 text-uppercase headerCard" style="text-align: center; font-weight: bold;">Custom Tip</div>
+                    <div class="p-4">
+                        <p class="font-italic mb-4" style="font-weight: bold;">Select a tip for the driver</p>
+                        <div class="input-group mb-4 border rounded-pill p-2">
+                            <input type="text" id="customTipInput" placeholder="Tip" aria-describedby="button-addon3" class="form-control border-0">
+                            <div class="input-group-append border-0">
+                                <button id="applyCustomTip" type="button" class="btn coupon px-4 rounded-pill">Apply</button>
+                            </div>
+                        </div>
+                        <div class="tip-buttons">
+                          <button class="tip-button" data-percentage="0">Not Today</button>
+                          <button class="tip-button" data-percentage="5">5%</button>
+                          <button class="tip-button" data-percentage="10">10%</button>
+                          <button class="tip-button" data-percentage="15">15%</button>
+                          <button class="tip-button" data-percentage="20">20%</button>
+                      </div>
+                    </div> -->
+
+                  <!-- <div class="rounded-pill px-4 py-3 text-uppercase headerCard" style="text-align: center; font-weight: bold;">Order summary </div> -->
+                  <!-- <div class="p-4">
+                    <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+                    <ul class="list-unstyled mb-4 orderSummaryList">
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Subtotal </strong><strong>£{{ check.orderSubTotal }}</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Service fee</strong><strong>£2.50</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Delivery fee</strong><strong>£1.89</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Custom Tip</strong><strong>£0.00</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom orderTotal"><strong class="text-muted">Total</strong><strong>£{{ check.orderTotal }}</strong>
+                        
+                      </li>
+                    </ul><a href="#" class="btn placeOrder rounded-pill py-2 btn-block">Place order</a>
+                  </div> -->
+                  <p class="font-italic mb-4 " style="font-weight: bold;"><h2>Order Total</h2></p>
+                  <div class="p-4 orderTotalList">
+                    <ul id="orderDetailsList" class="list-unstyled mb-4 orderSummaryList" data-subtotal="{{ check.orderSubTotal }}" data-total="{{ check.orderTotal }}">
+                      <li class="d-flex justify-content-between py-3 border-bottom" data-subtotal="{{ check.orderSubTotal }}"><strong class="text-muted">Subtotal</strong><strong class="subTotalAmount">£{{ check.orderSubTotal }}</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom toHide"><strong class="text-muted">Service fee</strong><strong>£2.50</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom toHide"><strong class="text-muted">Delivery fee</strong><strong>£1.89</strong></li>  
+                      <li class="d-flex justify-content-between py-3 border-bottom toHide"><strong class="text-muted">Total</strong><strong class="orderTotal" data-total="{{ check.orderTotal }}">£{{ check.orderTotal }}</strong></li>
+                    </ul>
+                    <form class="placeOrderButton" method="POST" action="{% url 'checkout_session' check.order_id %}">
+                      {% csrf_token %}
+                      <input type="hidden" id="calculatedTotalInput" name="calculatedTotal" value="">
+                      <input type="hidden" id="collectRiderTip" name="collectTip" value="">
+                      <input type="hidden" id="collectOrderMode" name="collectOrderType" value="">
+                      <input type="hidden" id="delivererInstruction" name="collectInstruction" value="">
+                      <input type="submit" class="btn placeOrder rounded-pill py-2 btn-block" value="Place order">
+                    </form>
+                  </div>
+                </div>
+              </div>
+      
+            </div>
+          </div>
+        </div>
+        <!-- <div class="modal" id="addressModal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Add Address</h2>
+              <span class="close-btn" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+              <div class="scrollable">
+                <input type="text" id="streetName" placeholder="Street Name">
+                <input type="text" id="city" placeholder="City">
+                <input type="text" id="postcode" placeholder="Postcode">
+                <input type="text" id="phoneNumber" placeholder="Phone Number">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="confirmAddress">Confirm Address</button>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+          <div class="modal fade" id="addressModal" data-customerid="{{ check.customer_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            {% csrf_token %}
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Address Details</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 50vh; overflow-y: auto;">
+                  <div class="mb-3">
+                    <label for="streetAddress" class="form-label">Street Address</label>
+                    <input type="text" class="form-control" id="streetAddress">
+                    <div class="invalid-feedback" id="streetAddressError">Please enter the street address</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="city" class="form-label">City/Town</label>
+                    <input type="text" class="form-control" id="city">
+                    <div class="invalid-feedback" id="cityError">Please enter the city or town</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="postcode" class="form-label">Postcode</label>
+                    <input type="text" class="form-control" id="postcode">
+                    <div class="invalid-feedback" id="postcodeError">Please enter the postcode</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phoneNumber">
+                    <div class="invalid-feedback" id="phoneNumberError">Please enter a valid phone number</div>
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center align-items-center flex-column">
+                  <div>
+                    <button class="addAddressList" id="addAddressButton">Confirm Address</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </body>
+</html>
+

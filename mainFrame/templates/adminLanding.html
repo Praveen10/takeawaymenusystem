@@ -1,0 +1,981 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>YummiLicious</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS  -->
+    <link rel="stylesheet" href="{% static 'css/adminLanding.css' %}">
+    <!-- Logo -->
+    <link rel="icon" href="{% static 'images/mainLogo.png' %}">
+    <!-- CSS Boostrap and datatable -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-1.13.5/b-2.4.1/b-html5-2.4.1/b-print-2.4.1/datatables.min.css" rel="stylesheet">
+    <!-- JS bootstrap and datatable -->
+    <script defer src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <!-- Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script defer src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script> -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script defer src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-1.13.5/b-2.4.1/b-html5-2.4.1/b-print-2.4.1/datatables.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script defer src="{% static 'js/adminLanding.js' %}"></script>
+</head>
+<body>
+    <nav>
+        <!-- <div class="bar">
+            <i class="fa-solid fa-bars fa-xl"></i>
+        </div> -->
+        <div class="logo">
+            <img src="{% static 'images/CoolBrand.png' %}" height="60"  alt="CoolBrand">
+        </div>
+        <ul>
+            <!-- <li>
+                <div class="search-bar"><i class="fa-solid fa-magnifying-glass"></i> <input type="search" placeholder="Search for a food"></div>
+            </li> -->
+            <li>
+                <a href="{% url 'home' %}"><i class="fa-solid fa-right-from-bracket"></i>&ensp;Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="roww">
+        <div class="column1" style="background-image: linear-gradient(to top, #50cc7f 0%, #f5d100 100%);">
+            <ul class="nav flex-column">
+                <!-- <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="#">
+                        <i class="fa-solid fa-house"></i>Dashboard
+                    </a>
+                </li> -->
+                {% if validation == 'restaurant' %}
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{% url 'adminLanding' %}">
+                            <i class="fa-solid fa-house"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" href="{% url 'restaurantList' %}">
+                            <i class="fa-solid fa-bell-concierge"></i>Restaurants
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="{% url 'customerList' %}">
+                            <i class="fa-solid fa-user"></i>Customers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="{% url 'delivererList' %}">
+                            <i class="fa fa-motorcycle"></i>Riders
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="{% url 'approvalList' %}">
+                            <i class="fa-solid fa-file-circle-exclamation"></i>Approval
+                        </a>
+                    </li>
+                {% elif validation == 'customer' %}
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{% url 'adminLanding' %}">
+                            <i class="fa-solid fa-house"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="{% url 'restaurantList' %}">
+                            <i class="fa-solid fa-bell-concierge"></i>Restaurants
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" href="{% url 'customerList' %}">
+                            <i class="fa-solid fa-user"></i>Customers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="{% url 'delivererList' %}">
+                            <i class="fa fa-motorcycle"></i>Riders
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="{% url 'approvalList' %}">
+                            <i class="fa-solid fa-file-circle-exclamation"></i>Approval
+                        </a>
+                    </li>
+                {% elif validation == 'deliverer' %}
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{% url 'adminLanding' %}">
+                        <i class="fa-solid fa-house"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'restaurantList' %}">
+                        <i class="fa-solid fa-bell-concierge"></i>Restaurants
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'customerList' %}">
+                        <i class="fa-solid fa-user"></i>Customers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 active" href="{% url 'delivererList' %}">
+                        <i class="fa fa-motorcycle"></i>Riders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'approvalList' %}">
+                        <i class="fa-solid fa-file-circle-exclamation"></i>Approval
+                    </a>
+                </li>
+                {% elif validation == 'approval' %}
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{% url 'adminLanding' %}">
+                        <i class="fa-solid fa-house"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'restaurantList' %}">
+                        <i class="fa-solid fa-bell-concierge"></i>Restaurants
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'customerList' %}">
+                        <i class="fa-solid fa-user"></i>Customers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'delivererList' %}">
+                        <i class="fa fa-motorcycle"></i>Riders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 active" href="{% url 'approvalList' %}">
+                        <i class="fa-solid fa-file-circle-exclamation"></i>Approval
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{% url 'adminLanding' %}">
+                        <i class="fa-solid fa-house"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'restaurantList' %}">
+                        <i class="fa-solid fa-bell-concierge"></i>Restaurants
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'customerList' %}">
+                        <i class="fa-solid fa-user"></i>Customers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'delivererList' %}">
+                        <i class="fa fa-motorcycle"></i>Riders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'approvalList' %}">
+                        <i class="fa-solid fa-file-circle-exclamation"></i>Approval
+                    </a>
+                </li>
+                {% endif %}
+            </ul>    
+        </div>
+        <div class="column2" style="background-image: linear-gradient(to bottom, #50cc7f 0%, #f5d100 100%);">
+            <!-- <p><button id="addRow" data-toggle="modal" data-target="#addMenu">Add New</button></p> -->
+            {% if validation == 'restaurant' %}
+                <h2 class="headerList">Restaurant List</h2>
+                <div class="AddButton">
+                    <button type="button" class="btn" style="background-color: #037c21; color: white;" data-toggle="modal" data-target="#addRestaurant">
+                        <i class="fa-solid fa-plus"></i> Add Restaurant
+                    </button>
+                </div>
+                <table id="example" class="table table-bordered" style="text-align: center;">
+                    <thead class="tableHead">
+                        <tr>
+                        <th style="text-align: center;">S.No</th>
+                        <th style="text-align: center;">Restaurant Name</th>
+                        <th style="text-align: center;">Cusine Type</th>
+                        <th style="text-align: center;">Address</th>
+                        <th style="text-align: center;">Phone Number</th>
+                        <th style="text-align: center;">City</th>
+                        <th style="text-align: center;">Post Code</th>
+                        <th style="text-align: center;">Hygine Rating</th>
+                        <th style="text-align: center;">Action</th>
+                        <th style="display:none;">Post Code</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                    <!-- Dynamically change based on the data -->
+                        {% for getData in data %}
+                            <tr class="record">
+                                <td>{{ forloop.counter }}</td>
+                                <td id="itemName{{ forloop.counter }}">{{ getData.restaurantName }}</td>
+                                <td id="itemtype{{ forloop.counter }}">{{ getData.cuisineType }}</td>
+                                <td id="itemdesc{{ forloop.counter }}">{{ getData.restaurantAddress }}</td>
+                                <td id="itemdesc{{ forloop.counter }}">{{ getData.phoneNumber }}</td>
+                                <td id="itemprice{{ forloop.counter }}">{{ getData.city }}</td>
+                                <td id="itemprice{{ forloop.counter }}">{{ getData.postcode }}</td>
+                                <td id="itemhygineRating{{ forloop.counter }}">{{ getData.hygineRating }}</td>
+                                <td>
+                                    <!-- <a href="#" data-toggle="modal" data-target="#editModelItem" id="editItem{{ forloop.counter }}" onclick=loadEditForm()><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp; -->
+                                    <a href="restaurantList/adminEditCustomerOrRestaurant" class="editRestaurant" data-restaurantid="{{ getData.restaurant_id }}"><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp;
+                                    <a href="adminRestaurantOrCustomerDeletion/{{ getData.restaurant_id }}" id="deleteRestaurant{{ forloop.counter }}"><i class="fa-solid fa-trash" style="color: #e82626;"></i></a>
+                                </td>
+                                <td style="display:none;">{{ getData.postcode }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% elif validation == 'customer' %}
+                <h2 class="headerList">Customer List</h2>
+                <div class="AddButton">
+                    <button type="button" class="btn" style="background-color: #037c21; color: white;" data-toggle="modal" data-target="#addCustomer">
+                        <i class="fa-solid fa-plus"></i> Add Customer
+                    </button>
+                </div>
+                <table id="example" class="table table-bordered" style="text-align: center;">
+                    <thead class="tableHead">
+                        <tr>
+                        <th style="text-align: center;">S.No</th>
+                        <th style="text-align: center;">User Name</th>
+                        <th style="text-align: center;">First Name</th>
+                        <th style="text-align: center;">Last Name</th>
+                        <th style="text-align: center;">Email</th>
+                        <th style="text-align: center;">Phone</th>
+                        <th style="text-align: center;">Action</th>
+                        <th style="display:none;">token</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                    <!-- Dynamically change based on the data -->
+                        {% for getData in data %}
+                            <tr class="record">
+                                <td>{{ forloop.counter }}</td>
+                                <td id="itemName{{ forloop.counter }}">{{ getData.username }}</td>
+                                <td id="itemName{{ forloop.counter }}">{{ getData.firstname }}</td>
+                                <td id="itemdesc{{ forloop.counter }}">{{ getData.lastname }}</td>
+                                <td id="itemtype{{ forloop.counter }}">{{ getData.email }}</td>
+                                <td id="itemprice{{ forloop.counter }}">{{ getData.phone }}</td>
+                                <td>
+                                    <!-- <a href="#" data-toggle="modal" data-target="#editModelItem" id="editItem{{ forloop.counter }}" onclick=loadEditForm()><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp; -->
+                                    <a href="adminEditCustomerOrRestaurant" class="editCustomer" data-customerid="{{ getData.id }}"><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp;
+                                    <a href="adminRestaurantOrCustomerDeletion/{{ getData.id }}" id="deleteCustomerData{{ forloop.counter }}"><i class="fa-solid fa-trash" style="color: #e82626;"></i></a>
+                                </td>
+                                <td style="display:none;">{{ getData.token }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% elif validation == 'deliverer' %}
+                <h2 class="headerList">Rider's List</h2>
+                
+                <table id="example" class="table table-bordered" style="text-align: center;">
+                    <thead class="tableHead">
+                        <tr>
+                        <th style="text-align: center;">S.No</th>
+                        <th style="text-align: center;">First Name</th>
+                        <th style="text-align: center;">Email</th>
+                        <th style="text-align: center;">Phone</th>
+                        <th style="text-align: center;">Work Location</th>
+                        <th style="text-align: center;">Riders Location</th>
+                        <th style="text-align: center;">vehicleType</th>
+                        <th style="text-align: center;">Action</th>
+                        <th style="display:none;">token</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                    <!-- Dynamically change based on the data -->
+                        {% for getData in data %}
+                            <tr class="record">
+                                <td>{{ forloop.counter }}</td>
+                                <td id="riderName{{ forloop.counter }}">{{ getData.firstname }}</td>
+                                <td id="riderName{{ forloop.counter }}">{{ getData.email }}</td>
+                                <td id="riderdesc{{ forloop.counter }}">{{ getData.phoneNumber }}</td>
+                                <td id="ridertype{{ forloop.counter }}">{{ getData.location }}</td>
+                                <td id="riderprice{{ forloop.counter }}">{{ getData.postCode }}</td>
+                                <td id="ridermprice{{ forloop.counter }}">{{ getData.vehicleType }}</td>
+                                <td>
+                                    <a href="delivererUpdateOrDelete/{{ getData.deliverer_id }}" class="editDeliverer" data-delivererid="{{ getData.deliverer_id }}"><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp;
+                                    <a href="delivererUpdateOrDelete/{{ getData.deliverer_id }}" id="deleteDeliverData{{ forloop.counter }}"><i class="fa-solid fa-trash" style="color: #e82626;"></i></a>
+                                </td>
+                                <td style="display:none;">{{ getData.token }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% elif validation == 'approval' %}
+                    {% if toList == 'rider' %}
+                        <h2 class="headerList" style="margin-bottom: 60px;">Rider's List</h2>
+                        
+                        <table id="example" class="table table-bordered" style="text-align: center;">
+                            <thead class="tableHead">
+                                <tr>
+                                <th style="text-align: center;">S.No</th>
+                                <th style="text-align: center;">First Name</th>
+                                <th style="text-align: center;">Email</th>
+                                <th style="text-align: center;">Phone</th>
+                                <th style="text-align: center;">Work Location</th>
+                                <th style="text-align: center;">Riders Location</th>
+                                <th style="text-align: center;">vehicleType</th>
+                                <th style="text-align: center;">Action</th>
+                                <th style="display:none;">token</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                            <!-- Dynamically change based on the data -->
+                            {% for getDelivererData in delivererData %}
+                                <tr class="record">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td id="riderName{{ forloop.counter }}">{{ getDelivererData.firstname }}</td>
+                                    <td id="riderName{{ forloop.counter }}">{{ getDelivererData.email }}</td>
+                                    <td id="riderdesc{{ forloop.counter }}">{{ getDelivererData.phoneNumber }}</td>
+                                    <td id="ridertype{{ forloop.counter }}">{{ getDelivererData.location }}</td>
+                                    <td id="riderprice{{ forloop.counter }}">{{ getDelivererData.postCode }}</td>
+                                    <td id="ridermprice{{ forloop.counter }}">{{ getDelivererData.vehicleType }}</td>
+                                    <td>
+                                        <!-- <a href="#" data-toggle="modal" data-target="#editModelItem" id="editItem{{ forloop.counter }}" onclick=loadEditForm()><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp; -->
+                                        <a href="delivererRestaurantAcceptOrDelete/{{ getDelivererData.deliverer_id }}" id="acceptRider{{ forloop.counter }}"><i class="fa-solid fa-check"></i></a> &ensp;&ensp;
+                                        <a href="delivererRestaurantAcceptOrDelete/{{ getDelivererData.deliverer_id }}" id="deleteDelivererData{{ forloop.counter }}"><i class="fa-solid fa-xmark" style="color: #e82626;"></i></a>
+                                    </td>
+                                    <td style="display:none;">{{ getData.token }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% elif toList == 'restaurant' %}
+                        <h2 class="headerList" style="margin-bottom: 60px;">Restaurant Approval List</h2>
+                        <table id="example" class="table table-bordered" style="text-align: center;">
+                            <thead class="tableHead">
+                                <tr>
+                                <th style="text-align: center;">S.No</th>
+                                <th style="text-align: center;">Restaurant Name</th>
+                                <th style="text-align: center;">Cusine Type</th>
+                                <th style="text-align: center;">Address</th>
+                                <th style="text-align: center;">Phone Number</th>
+                                <th style="text-align: center;">City</th>
+                                <th style="text-align: center;">Post Code</th>
+                                <th style="text-align: center;">Action</th>
+                                <th style="display:none;">Post Code</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                            <!-- Dynamically change based on the data -->
+                            {% for getData in restaurantData %}
+                                <tr class="record">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td id="itemName{{ forloop.counter }}">{{ getData.restaurantName }}</td>
+                                    <td id="itemtype{{ forloop.counter }}">{{ getData.cuisineType }}</td>
+                                    <td id="itemdesc{{ forloop.counter }}">{{ getData.restaurantAddress }}</td>
+                                    <td id="itemdesc{{ forloop.counter }}">{{ getData.phoneNumber }}</td>
+                                    <td id="itemprice{{ forloop.counter }}">{{ getData.city }}</td>
+                                    <td id="itemprice{{ forloop.counter }}">{{ getData.postcode }}</td>
+                                    <td>
+                                        <!-- <a href="#" data-toggle="modal" data-target="#editModelItem" id="editItem{{ forloop.counter }}" onclick=loadEditForm()><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp; -->
+                                        <a href="delivererRestaurantAcceptOrDelete/{{ getData.restaurant_id }}" id="acceptRestaurant{{ forloop.counter }}" ><i class="fa-solid fa-check"></i></a> &ensp;&ensp;
+                                        <a href="delivererRestaurantAcceptOrDelete/{{ getData.restaurant_id }}" id="rejectRestaurantData{{ forloop.counter }}"><i class="fa-solid fa-xmark" style="color: #e82626;"></i></a>
+                                    </td>
+                                    <td style="display:none;">{{ getData.postcode }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div>
+                            <h2 class="headerList" style="margin-bottom: 60px;">Restaurant Approval List</h2>
+                            <table id="example" class="table table-bordered" style="text-align: center;">
+                                <thead class="tableHead">
+                                    <tr>
+                                    <th style="text-align: center;">S.No</th>
+                                    <th style="text-align: center;">Restaurant Name</th>
+                                    <th style="text-align: center;">Cusine Type</th>
+                                    <th style="text-align: center;">Address</th>
+                                    <th style="text-align: center;">Phone Number</th>
+                                    <th style="text-align: center;">City</th>
+                                    <th style="text-align: center;">Post Code</th>
+                                    <th style="text-align: center;">Action</th>
+                                    <th style="display:none;">Post Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                <!-- Dynamically change based on the data -->
+                                    {% for getData in restaurantData %}
+                                        <tr class="record">
+                                            <td>{{ forloop.counter }}</td>
+                                            <td id="itemName{{ forloop.counter }}">{{ getData.restaurantName }}</td>
+                                            <td id="itemtype{{ forloop.counter }}">{{ getData.cuisineType }}</td>
+                                            <td id="itemdesc{{ forloop.counter }}">{{ getData.restaurantAddress }}</td>
+                                            <td id="itemdesc{{ forloop.counter }}">{{ getData.phoneNumber }}</td>
+                                            <td id="itemprice{{ forloop.counter }}">{{ getData.city }}</td>
+                                            <td id="itemprice{{ forloop.counter }}">{{ getData.postcode }}</td>
+                                            <td>
+                                                <!-- <a href="#" data-toggle="modal" data-target="#editModelItem" id="editItem{{ forloop.counter }}" onclick=loadEditForm()><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp; -->
+                                                <a href="delivererRestaurantAcceptOrDelete/{{ getData.restaurant_id }}" id="acceptRestaurant{{ forloop.counter }}" ><i class="fa-solid fa-check"></i></a> &ensp;&ensp;
+                                                <a href="delivererRestaurantAcceptOrDelete/{{ getData.restaurant_id }}" id="rejectRestaurantData{{ forloop.counter }}"><i class="fa-solid fa-xmark" style="color: #e82626;"></i></a>
+                                            </td>
+                                            <td style="display:none;">{{ getData.postcode }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                
+                            </table>
+                            </div>
+                            <hr style="margin-top: 40px; margin-bottom: 40px;">
+                            <div>
+                                <h2 class="headerList" style="margin-bottom: 60px;">Rider Approval List</h2>
+                                
+                                <table id="example1" class="table table-bordered" style="text-align: center;">
+                                    <thead class="tableHead">
+                                        <tr>
+                                        <th style="text-align: center;">S.No</th>
+                                        <th style="text-align: center;">First Name</th>
+                                        <th style="text-align: center;">Email</th>
+                                        <th style="text-align: center;">Phone</th>
+                                        <th style="text-align: center;">Work Location</th>
+                                        <th style="text-align: center;">Riders Location</th>
+                                        <th style="text-align: center;">vehicleType</th>
+                                        <th style="text-align: center;">Action</th>
+                                        <th style="display:none;">token</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                    <!-- Dynamically change based on the data -->
+                                        {% for getDelivererData in delivererData %}
+                                            <tr class="record">
+                                                <td>{{ forloop.counter }}</td>
+                                                <td id="riderName{{ forloop.counter }}">{{ getDelivererData.firstname }}</td>
+                                                <td id="riderName{{ forloop.counter }}">{{ getDelivererData.email }}</td>
+                                                <td id="riderdesc{{ forloop.counter }}">{{ getDelivererData.phoneNumber }}</td>
+                                                <td id="ridertype{{ forloop.counter }}">{{ getDelivererData.location }}</td>
+                                                <td id="riderprice{{ forloop.counter }}">{{ getDelivererData.postCode }}</td>
+                                                <td id="ridermprice{{ forloop.counter }}">{{ getDelivererData.vehicleType }}</td>
+                                                <td>
+                                                    <!-- <a href="#" data-toggle="modal" data-target="#editModelItem" id="editItem{{ forloop.counter }}" onclick=loadEditForm()><i class="fa-solid fa-pen-to-square"></i></a> &ensp;&ensp; -->
+                                                    <a href="delivererRestaurantAcceptOrDelete/{{ getDelivererData.deliverer_id }}" id="acceptRider{{ forloop.counter }}"><i class="fa-solid fa-check"></i></a> &ensp;&ensp;
+                                                    <a href="delivererRestaurantAcceptOrDelete/{{ getDelivererData.deliverer_id }}" id="deleteDelivererData{{ forloop.counter }}"><i class="fa-solid fa-xmark" style="color: #e82626;"></i></a>
+                                                </td>
+                                                <td style="display:none;">{{ getData.token }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                        </div>
+                    {% endif %}
+            {% else %}
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="header">Admin Zone!</h1>
+                    </div>
+                    <div class="col">
+                        <button type="button" id="keyGenerate" class="btn keyButton" style="background-color: #037c21; color: white;"><i class="fa-solid fa-bolt"></i> Change Key</button>
+                    </div>
+                </div>
+            </div>
+                <div class="col-md-10 ">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card l-bg-blue">
+                                <div class="card-statistic-3 p-4">
+                                    <div class="card-icon card-icon-large"><i class="fa-solid fa-users"></i></div>
+                                    <div class="mb-4">
+                                        <h5 class="card-title mb-0">Customers</h5>
+                                    </div>
+                                    <div class="row align-items-center mb-2 d-flex">
+                                        <div class="col-8">
+                                            <h2 class="d-flex align-items-center mb-0">
+                                                {{ customerCount }}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card l-bg-beige">
+                                <div class="card-statistic-3 p-4">
+                                    <div class="card-icon card-icon-large"><i class="fa-solid fa-bell-concierge"></i></div>
+                                    <div class="mb-4">
+                                        <h5 class="card-title mb-0">Restaurants</h5>
+                                    </div>
+                                    <div class="row align-items-center mb-2 d-flex">
+                                        <div class="col-8">
+                                            <h2 class="d-flex align-items-center mb-0">
+                                                {{ restaurantCount }}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card l-bg-blue">
+                                <div class="card-statistic-3 p-4">
+                                    <div class="card-icon card-icon-large"><i class="fa-solid fa-sterling-sign"></i></div>
+                                    <div class="mb-4">
+                                        <h5 class="card-title mb-0">Revenue</h5>
+                                    </div>
+                                    <div class="row align-items-center mb-2 d-flex">
+                                        <div class="col-8">
+                                            <h2 class="d-flex align-items-center mb-0">
+                                                {{ revenue }}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card l-bg-beige">
+                                <div class="card-statistic-3 p-4">
+                                    <div class="card-icon card-icon-large"><i class="fa-solid fa-scale-balanced"></i></div>
+                                    <div class="mb-4">
+                                        <h5 class="card-title mb-0">Profit</h5>
+                                    </div>
+                                    <div class="row align-items-center mb-2 d-flex">
+                                        <div class="col-8">
+                                            <h2 class="d-flex align-items-center mb-0">
+                                                {{ profit }}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <h1 class="header">Charts.!!</h1>
+                  <div class="container-fluid">
+                    <div class="row chart-row">
+                      <div class="col-md-6">
+                        <div class="card cardChart">
+                          <div class="card-body">
+                            <canvas id="pieChart"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card cardChart">
+                          <div class="card-body">
+                            <canvas id="bar"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="chartss" style="display: flex;">
+                    <div style="width: 400px; height: 400px;">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                    <div style="width: 400px; height: 400px;">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div> -->
+                  <!-- <div class="container">
+                    <div class="row flex-column" style="width: 30%;">
+                        <div class="col">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                        <div class="col">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div> -->
+                    <script>
+                        
+                        function createChart(charts, chartType, getData, getLabel, barColor, legendDisplay){
+                            return new Chart(charts, {
+                                type: chartType, 
+                                data: {
+                                    labels: getLabel,
+                                    datasets: [{
+                                    label: 'Total count',
+                                    data: getData,
+                                    backgroundColor: barColor,
+                                    borderWidth: 1
+                                    }]
+                                },
+                                options: {  
+                                    plugins: {
+                                        legend: {
+                                            display: legendDisplay, // legend
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        const pie = document.getElementById('pieChart');
+                        const doughnut = document.getElementById('doughnutChart');
+
+                        pieDataValue = ["{{ revenue }}", "{{ profit }}"]
+                        barDataValue = ["{{ restaurantCount|safe }}", "{{ customerCount|safe }}", "{{ orderCount|safe }}", "{{ delivererCount|safe }}"]
+
+                        pieLabel = ['Revenue', 'Profit']
+                        barLabel = ['Restaurant', 'Customer', 'Order', 'Rider']
+
+                        var barColor = ['#C8DF52', '#0A7029', '#FEDE00', '#DBE8D8']
+
+                        createChart(pie, 'pie', pieDataValue, pieLabel, barColor, true);
+                        createChart(bar, 'bar', barDataValue, barLabel, barColor, false);
+                    </script>
+                  </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- FOR ADD Restaurant FUNCTION -->
+    <div class="modal" id="addRestaurant" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" id="restform">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="header">Add Restaurant</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <label class="formLabel">First Name</label>
+                                <input type="text" class="form-control" id="restaurantFirstName" placeholder="Joe">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Last Name</label>
+                                <input type="text" class="form-control" id="restaurantLastName" placeholder="Dee">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formLabel">Email</label>
+                            <input id="restaurantEmail" type="email" placeholder="joe@gmail.com" class="form-control" >
+                            <div class="error"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="formLabel">Password</label>
+                                <input id="restaurantPassword" type="password" placeholder="******" class='form-control' >
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Confirm Password</label>
+                                <input id="restaurantConfirmPassword" type="password" placeholder="******" class='form-control' >
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="formLabel">Restaurant Name</label>
+                                <input id="restaurantName" type="text" class="form-control" placeholder="chill sizzle">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Phone Number</label>
+                                <input id="restaurantPhoneNumber" type="tel" class='form-control' placeholder="1515151151">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formLabel">Restaurant Address</label>
+                            <textarea class="form-control" id="restaurantAddress" rows="3" placeholder="20, midstreet"></textarea>
+                            <div class="error"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="formLabel">City</label>
+                                <input id="restaurantCity" placeholder="oxford" type="text" class="form-control">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Post Code</label>
+                                <input id="restaurantPostCode" placeholder="AB1 1GH" type="text" class="form-control">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="formLabel">Cusine Type</label>
+                                <input id="cusineType" placeholder="British" type="text" class="form-control">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Hygine Rating</label>
+                                <select class="form-control" id="hygineRating">
+                                    <option> </option>
+                                    <option>5</option>
+                                    <option>4</option>
+                                    <option>3</option>
+                                    <option>2</option>
+                                    <option>1</option>
+                                </select>
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="createRestaurant" class="btn btn-primary">Add Restaurant</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- FOR ADD CUSTOMER FUNCTION -->
+    <div class="modal" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" id="customerform">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="header">Add Customer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <label class="formLabel">First Name</label>
+                                <input type="text" class="form-control" id="customerFirstName" placeholder="Joe">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Last Name</label>
+                                <input type="text" class="form-control" id="customerLastName" placeholder="Dee">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formLabel">User Name</label>
+                            <input id="customerUserName" type="text" class="form-control" placeholder="joed" >
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formLabel">Email</label>
+                            <input id="customerEmail" type="email" placeholder="joe@gmail.com" class="form-control" >
+                            <div class="error"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="formLabel">Password</label>
+                                <input id="customerPassword" type="password" placeholder="******" class='form-control' >
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Confirm Password</label>
+                                <input id="customerConfirmPassword" type="password" placeholder="******" class='form-control' >
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formLabel">Phone Number</label>
+                            <input id="customerPhoneNumber" type="tel" class='form-control' placeholder="1515151151" >
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="createCustomer" class="btn btn-primary">Add Customer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- FOR UPDATE Restaurant -->
+<div class="modal" id="editRestaurantForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="editRestauarntt">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="header">Update Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                            <div class="col">
+                                <label class="formLabel">Restaurant Name</label>
+                                <input id="editRestaurantName" type="text" class="form-control" placeholder="chill sizzle">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Phone Number</label>
+                                <input id="editRestaurantPhoneNumber" type="tel" class='form-control' placeholder="1515151151">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formLabel">Restaurant Address</label>
+                            <textarea class="form-control" id="editRestaurantAddress" rows="3" placeholder="20, midstreet"></textarea>
+                            <div class="error"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="formLabel">City</label>
+                                <input id="editRestaurantCity" type="text" class="form-control">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Post Code</label>
+                                <input id="editRestaurantPostCode" type="text" class="form-control">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="formLabel">Cusine Type</label>
+                                <input id="editCusineType" type="text" class="form-control">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Hygine Rating</label>
+                                <select class="form-control" id="editRestaurantHygineRating">
+                                    <option> </option>
+                                    <option>5</option>
+                                    <option>4</option>
+                                    <option>3</option>
+                                    <option>2</option>
+                                    <option>1</option>
+                                </select>
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formLabel">Best Food</label>
+                            <div class="tag-container">
+                            </div>
+                                <input type="text" id="tagInput" class="form-control" placeholder="Enter tags">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="editRestaurantData" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    <!-- UPDATE CUSTOMER -->
+    <div class="modal" id="editCustomerForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" id="editCustomerform">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="header">Edit Customer Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="formLabel">User Name</label>
+                                <input id="editCustomerUserName" type="text" class="form-control" placeholder="joed" >
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">First Name</label>
+                                <input type="text" class="form-control" id="editCustomerFirstName" placeholder="Joe">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="formLabel">Last Name</label>
+                                <input type="text" class="form-control" id="editCustomerLastName" placeholder="Dee">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formLabel">Email</label>
+                            <input id="editCustomerEmail" type="email" placeholder="joe@gmail.com" class="form-control" >
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formLabel">Phone Number</label>
+                            <input id="editCustomerPhoneNumber" type="tel" class='form-control' placeholder="1515151151" >
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="editCustomerData" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- UPDATE DELIVERER -->
+    <div class="modal" id="editDelivererForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" id="editDelivererForm">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5>Update Rider</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input id="delivererName" type="text" class="form-control">
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input id="delivererEmail" type="email" class="form-control">
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input id="delivererNumber" type="tel" class="form-control">
+                            <div class="error"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Work Location</label>
+                                <input id="delivererWorkLocation" type="text" class="form-control">
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label>Rider Location</label>
+                                <input id="delivererLocation" type="text" class="form-control">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Vehicle Type</label>
+                            <select class="form-control" id="vehicleType">
+                                <option value="select">Please select</option>
+                                <option value="bicycle">Bicycle</option>
+                                <option value="electric_bicycle">Electric Bicycle</option>
+                                <option value="scooter">Scooter</option>
+                                <option value="car">Car</option>
+                            </select>
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="updateDeliverer" class="btn btn-primary">Upadate Rider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+
+

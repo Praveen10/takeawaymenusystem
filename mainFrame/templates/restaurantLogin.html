@@ -1,0 +1,57 @@
+<!-- <h1>Login</h1> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>YummiLicious</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <script type="text/javascript" defer src="{% static 'js/login.js' %}"></script>
+</head>
+<body src="{% static 'images/Logol.png' %}">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a href="#" class="navbar-brand">
+        <img src="{% static 'images/CoolBrand.png' %}" height="50"  alt="CoolBrand">
+      </a>
+    </div>
+  </nav>
+  
+  <div class="divBar">   
+    <section class="container">
+      <header>Login into your account</header>
+        <form method="POST" action="" id="form" class="form">
+          {% csrf_token %}
+          <div class="input-box">
+            <label>Email Address</label>
+            <input id="email" type="text" placeholder="joe@gmail.com" name='emailAddress' >
+            {% if messages %}
+              {% for message in messages %}
+                <div class="error">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <div class="input-box">
+            <label>Password</label>
+            <input type="password" placeholder="******" name='password' id="password" id="email" >
+            <div class="error"></div>
+          </div>
+          <div class="forgot-pass">
+            <span>
+              <a href="/passwordReset/2">Forgot Password?</a>
+            </span>
+          </div>
+          <div class="text-center">
+            <button id="submit">LOG IN</button>
+          </div>
+        </form>
+        <div class="register">
+          Not yet registered? <a href="{% url 'restaurantRegistration' %}">Create</a>
+        </div>
+  </div>
+</body>
+</html>
